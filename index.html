@@ -1,762 +1,1924 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kushal R Gowda — AI/ML Engineer &amp; Backend Developer</title>
-<meta name="description" content="Portfolio of Kushal R Gowda — AI/ML engineer and backend developer building RAG pipelines, multi-agent LLM systems, and security-minded backend infrastructure.">
-<meta property="og:title" content="Kushal R Gowda — AI/ML Engineer & Backend Developer">
-<meta property="og:description" content="RAG pipelines, multi-agent LLM orchestration, and security-minded backend systems.">
-<meta property="og:type" content="website">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230A0C11'/%3E%3Ctext x='50' y='68' font-family='monospace' font-size='46' font-weight='700' fill='%2356C7D9' text-anchor='middle'%3EK%3C/text%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg: #0A0C11;
-    --panel: #10131B;
-    --panel-2: #0D1017;
-    --border: rgba(151,163,180,0.16);
-    --border-strong: rgba(151,163,180,0.3);
-    --text: #E7E9EE;
-    --text-muted: #8B93A3;
-    --text-faint: #565E6C;
-    --accent: #56C7D9;
-    --accent-rgb: 86,199,217;
-    --flag: #E7A857;
-    --flag-rgb: 231,168,87;
-    --ok: #4ADE80;
-    --font-sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
-    --container: 1120px;
-    --radius-sm: 6px;
-    --radius-md: 12px;
-    --radius-full: 999px;
-    --nav-h: 76px;
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kushal R Gowda — AI/ML Engineer &amp; Backend Developer</title>
+  <meta name="description"
+    content="Portfolio of Kushal R Gowda — AI/ML Engineer & Backend Developer crafting fraud-detection graphs, multi-agent LLM pipelines, and low-latency edge inference systems." />
+  <meta property="og:title" content="Kushal R Gowda — AI/ML Engineer & Backend Developer" />
+  <meta property="og:description"
+    content="Crafting resilient AI/ML pipelines, fraud-detection graphs, and low-latency backend systems." />
+  <meta property="og:type" content="website" />
+  <link rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%23b80d23'/%3E%3Ctext x='50' y='68' font-family='Georgia,serif' font-style='italic' font-size='54' font-weight='700' fill='%23ffe9ec' text-anchor='middle'%3EK%3C/text%3E%3C/svg%3E" />
 
-  *{box-sizing:border-box;}
-  html{-webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;}
-  @media (prefers-reduced-motion:no-preference){ html{scroll-behavior:smooth;} }
-  body{
-    margin:0; background:var(--bg); color:var(--text);
-    font-family:var(--font-sans); font-size:16px; line-height:1.6;
-  }
-  img,svg{display:block; max-width:100%;}
-  a{color:inherit; text-decoration:none;}
-  ul{margin:0; padding:0; list-style:none;}
-  h1,h2,h3,p{margin:0;}
-  button{font:inherit; color:inherit; background:none; border:none; cursor:pointer; padding:0;}
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-  :focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:2px;}
+  <!-- Google Fonts: Playfair Display (Bold Italic Serif for Hero Name), Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:ital,wght@0,700;0,800;1,700;1,800;1,900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
 
-  .skip-link{
-    position:absolute; left:1rem; top:-60px; background:var(--accent); color:#04121a;
-    padding:0.7rem 1.1rem; border-radius:var(--radius-sm); font-weight:600; z-index:200;
-    transition:top .2s ease;
-  }
-  .skip-link:focus{top:1rem;}
-
-  .container{max-width:var(--container); margin:0 auto; padding:0 1.5rem;}
-
-  section[id]{scroll-margin-top: calc(var(--nav-h) + 12px);}
-
-  /* ---------- Nav ---------- */
-  .nav{
-    position:fixed; top:0; left:0; right:0; z-index:100; height:var(--nav-h);
-    display:flex; align-items:center;
-    background:rgba(10,12,17,0.4); backdrop-filter:blur(0px);
-    border-bottom:1px solid transparent;
-    transition:background .25s ease, border-color .25s ease, backdrop-filter .25s ease;
-  }
-  .nav.scrolled{
-    background:rgba(10,12,17,0.85); backdrop-filter:blur(10px);
-    border-bottom:1px solid var(--border);
-  }
-  .nav-inner{display:flex; align-items:center; justify-content:space-between; width:100%;}
-  .nav-mark{
-    font-family:var(--font-mono); font-weight:600; font-size:1.05rem; letter-spacing:0.02em;
-    border:1px solid var(--border-strong); border-radius:var(--radius-sm);
-    width:38px; height:38px; display:flex; align-items:center; justify-content:center;
-    color:var(--accent);
-  }
-  .nav-menu{display:flex; align-items:center; gap:2rem;}
-  .nav-link{
-    font-size:0.95rem; color:var(--text-muted); position:relative; padding:0.3rem 0;
-    transition:color .2s ease;
-  }
-  .nav-link::after{
-    content:""; position:absolute; left:0; right:100%; bottom:-2px; height:1px;
-    background:var(--accent); transition:right .25s ease;
-  }
-  .nav-link:hover{color:var(--text);}
-  .nav-link:hover::after{right:0;}
-  .nav-link.active{color:var(--text);}
-  .nav-link.active::after{right:0;}
-  .nav-resume{
-    font-size:0.9rem; font-weight:600; color:var(--bg); background:var(--accent);
-    padding:0.55rem 1.05rem; border-radius:var(--radius-sm);
-    transition:opacity .2s ease;
-  }
-  .nav-resume:hover{opacity:0.85;}
-  .nav-toggle{
-    display:none; width:38px; height:38px; align-items:center; justify-content:center;
-    border:1px solid var(--border-strong); border-radius:var(--radius-sm);
-  }
-  .nav-toggle-icon, .nav-toggle-icon::before, .nav-toggle-icon::after{
-    display:block; width:16px; height:1.5px; background:var(--text); position:relative;
-    transition:transform .2s ease, opacity .2s ease;
-  }
-  .nav-toggle-icon::before, .nav-toggle-icon::after{content:""; position:absolute; left:0;}
-  .nav-toggle-icon::before{top:-5px;}
-  .nav-toggle-icon::after{top:5px;}
-  .nav-toggle[aria-expanded="true"] .nav-toggle-icon{background:transparent;}
-  .nav-toggle[aria-expanded="true"] .nav-toggle-icon::before{transform:rotate(45deg); top:0;}
-  .nav-toggle[aria-expanded="true"] .nav-toggle-icon::after{transform:rotate(-45deg); top:0;}
-
-  @media (max-width:860px){
-    .nav-toggle{display:flex;}
-    .nav-menu{
-      position:fixed; top:var(--nav-h); left:0; right:0; flex-direction:column; align-items:stretch;
-      gap:0; background:rgba(10,12,17,0.98); backdrop-filter:blur(10px);
-      border-bottom:1px solid var(--border);
-      max-height:0; overflow:hidden; transition:max-height .3s ease;
+  <style>
+    :root {
+      --crimson-bright: #e31b34;
+      --crimson-core: #b80d23;
+      --crimson-deep: #630411;
+      --crimson-darkest: #0f0306;
+      --cream-light: #fff2f4;
+      --cream-pink: #ffd4dc;
+      --accent-rose: #ff4d6d;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
     }
-    .nav-menu.open{max-height:420px;}
-    .nav-link, .nav-resume{padding:1.1rem 1.5rem; border-bottom:1px solid var(--border); border-radius:0; width:100%;}
-    .nav-link::after{display:none;}
-    .nav-resume{text-align:center;}
-  }
 
-  /* ---------- Buttons ---------- */
-  .btn{
-    display:inline-flex; align-items:center; gap:0.5rem; font-size:0.95rem; font-weight:600;
-    padding:0.8rem 1.4rem; border-radius:var(--radius-sm); border:1px solid transparent;
-    transition:transform .15s ease, opacity .2s ease, border-color .2s ease, background .2s ease;
-  }
-  .btn:hover{transform:translateY(-1px);}
-  .btn-primary{background:var(--accent); color:#04121a;}
-  .btn-primary:hover{opacity:0.9;}
-  .btn-ghost{border-color:var(--border-strong); color:var(--text);}
-  .btn-ghost:hover{border-color:var(--accent); color:var(--accent);}
-
-  /* ---------- Hero ---------- */
-  .hero{
-    position:relative; min-height:100vh; min-height:100svh; overflow:hidden;
-    display:flex; align-items:center; padding:calc(var(--nav-h) + 3rem) 0 4rem;
-  }
-  .hero-canvas{position:absolute; inset:0; z-index:0; width:100%; height:100%;}
-  .hero-scrim{
-    position:absolute; inset:0; z-index:1;
-    background:radial-gradient(ellipse 60% 50% at 30% 40%, rgba(10,12,17,0.55), rgba(10,12,17,0.88) 70%),
-               linear-gradient(180deg, rgba(10,12,17,0.2), rgba(10,12,17,0.95) 92%);
-  }
-  .hero-inner{position:relative; z-index:2; max-width:760px;}
-  .hero-status{
-    display:inline-flex; align-items:center; gap:0.55rem; font-family:var(--font-mono);
-    font-size:0.8rem; color:var(--text-muted); border:1px solid var(--border-strong);
-    border-radius:var(--radius-full); padding:0.45rem 0.9rem 0.45rem 0.7rem; margin-bottom:1.75rem;
-  }
-  .status-dot{width:7px; height:7px; border-radius:50%; background:var(--ok); box-shadow:0 0 0 3px rgba(74,222,128,0.18); flex-shrink:0;}
-  .hero-name{
-    font-size:clamp(2.6rem, 2.1rem + 3.4vw, 5rem); font-weight:600; letter-spacing:-0.02em;
-    line-height:1.05; margin-bottom:1.1rem;
-  }
-  .hero-role{
-    font-size:clamp(1.1rem, 1rem + 0.6vw, 1.4rem); color:var(--text); font-weight:400;
-    margin-bottom:1rem; max-width:34ch;
-  }
-  .hero-bio{
-    font-size:1.02rem; color:var(--text-muted); max-width:56ch; margin-bottom:2.25rem;
-  }
-  .hero-actions{display:flex; flex-wrap:wrap; gap:0.9rem;}
-  .hero-scroll-cue{
-    position:absolute; left:50%; bottom:2.2rem; transform:translateX(-50%); z-index:2;
-    width:34px; height:34px; border:1px solid var(--border-strong); border-radius:50%;
-    display:flex; align-items:center; justify-content:center; color:var(--text-muted);
-    transition:border-color .2s ease, color .2s ease;
-  }
-  .hero-scroll-cue:hover{border-color:var(--accent); color:var(--accent);}
-  @media (prefers-reduced-motion:no-preference){
-    .hero-status,.hero-name,.hero-role,.hero-bio,.hero-actions{
-      opacity:0; animation:heroIn .7s ease forwards;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
-    .hero-name{animation-delay:.08s;}
-    .hero-role{animation-delay:.18s;}
-    .hero-bio{animation-delay:.28s;}
-    .hero-actions{animation-delay:.38s;}
-  }
-  @keyframes heroIn{from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:translateY(0);}}
 
-  /* ---------- Sections (shared) ---------- */
-  .section{padding:6.5rem 0; border-top:1px solid var(--border);}
-  .section-inner{display:grid; grid-template-columns:minmax(140px,200px) 1fr; gap:1rem 3.5rem;}
-  .section-head h2{font-size:clamp(1.5rem,1.3rem+0.7vw,1.9rem); font-weight:600; letter-spacing:-0.01em;}
-  .section-body{min-width:0;}
-  .section-intro{color:var(--text-muted); max-width:62ch; margin-bottom:2.5rem; font-size:1.02rem;}
-  @media (max-width:780px){
-    .section-inner{grid-template-columns:1fr; gap:1.25rem;}
-    .section{padding:4.5rem 0;}
-  }
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--crimson-darkest);
+      color: var(--cream-light);
+      font-family: var(--font-sans);
+      -webkit-font-smoothing: antialiased;
+    }
 
-  /* ---------- About ---------- */
-  .about-layout{display:grid; grid-template-columns:220px 1fr; gap:2.5rem; align-items:start;}
-  .about-photo{
-    border:1px solid var(--border); border-radius:var(--radius-md); overflow:hidden; background:var(--panel);
-  }
-  .about-photo img{width:100%; height:100%; object-fit:cover; filter:saturate(0.94) contrast(1.03);}
-  .about-text{color:var(--text-muted); max-width:64ch; font-size:1.05rem; margin-bottom:2.75rem;}
-  .about-text strong{color:var(--text); font-weight:500;}
-  @media (max-width:780px){
-    .about-layout{grid-template-columns:1fr;}
-    .about-photo{max-width:200px;}
-  }
-  .stat-strip{display:flex; flex-wrap:wrap; gap:0; border-top:1px solid var(--border);}
-  .stat{
-    flex:1 1 160px; padding:1.4rem 1.75rem 1.4rem 0; border-bottom:1px solid var(--border);
-  }
-  .stat + .stat{border-left:1px solid var(--border); padding-left:1.75rem;}
-  .stat-value{
-    display:block; font-family:var(--font-mono); font-size:1.6rem; font-weight:600; color:var(--flag);
-  }
-  .stat-label{display:block; font-size:0.85rem; color:var(--text-muted); margin-top:0.3rem;}
-  @media (max-width:600px){
-    .stat + .stat{border-left:none; padding-left:0;}
-  }
+    body {
+      overflow-x: hidden;
+      background-color: var(--crimson-darkest);
+    }
 
-  /* ---------- Skills ---------- */
-  .skill-row{
-    display:grid; grid-template-columns:170px 1fr; gap:0.5rem 1.5rem; align-items:baseline;
-    padding:1.15rem 0; border-bottom:1px solid var(--border);
-  }
-  .skill-row:first-child{border-top:1px solid var(--border);}
-  .skill-cat{font-size:0.95rem; font-weight:500; color:var(--text);}
-  .skill-tags{display:flex; flex-wrap:wrap; gap:0.5rem;}
-  .tag{
-    font-family:var(--font-mono); font-size:0.82rem; color:var(--text-muted);
-    border:1px solid var(--border); border-radius:var(--radius-full); padding:0.3rem 0.75rem;
-    transition:border-color .2s ease, color .2s ease;
-  }
-  .tag:hover{border-color:var(--accent); color:var(--text);}
-  @media (max-width:640px){
-    .skill-row{grid-template-columns:1fr;}
-  }
+    /* ==========================================
+       VIRAL CRIMSON HERO STAGE
+       ========================================== */
+    .hero-stage {
+      position: relative;
+      min-height: 100vh;
+      min-height: 100svh;
+      width: 100%;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      /* Rich layered crimson studio backdrop matching the reference video */
+      background:
+        radial-gradient(circle 650px at var(--cursor-x, 62%) var(--cursor-y, 48%), rgba(255, 56, 82, 0.42), transparent 70%),
+        radial-gradient(ellipse 75% 70% at 62% 50%, #e01830 0%, #b50b21 42%, #6d0412 78%, #2e0108 100%);
+      transition: background 0.08s linear;
+    }
 
-  /* ---------- Experience ---------- */
-  .entry{display:flex; gap:1.25rem;}
-  .entry-mark{width:3px; border-radius:2px; background:var(--accent); flex-shrink:0; align-self:stretch;}
-  .entry-title{font-size:1.15rem; font-weight:600;}
-  .entry-org{color:var(--accent); font-family:var(--font-mono); font-size:0.9rem; margin-top:0.35rem;}
-  .entry-list{margin-top:1rem; display:flex; flex-direction:column; gap:0.6rem;}
-  .entry-list li{color:var(--text-muted); position:relative; padding-left:1.1rem; font-size:0.98rem;}
-  .entry-list li::before{content:"–"; position:absolute; left:0; color:var(--text-faint);}
-  .entry-detail{color:var(--text-muted); margin-top:0.5rem; font-size:0.98rem;}
+    /* Subtle film grain & vignette for studio 3D depth */
+    .hero-vignette {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 50% 50%, transparent 55%, rgba(18, 1, 5, 0.65) 100%),
+        linear-gradient(180deg, rgba(20, 1, 5, 0.22) 0%, transparent 20%, transparent 82%, #0f0306 100%);
+      z-index: 2;
+    }
 
-  /* ---------- Projects ---------- */
-  .projects-featured{display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin-bottom:1.5rem;}
-  .projects-compact{display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem;}
-  .project-card{
-    background:var(--panel); border:1px solid var(--border); border-left:2px solid var(--accent);
-    border-radius:var(--radius-md); padding:1.9rem;
-    transition:border-color .2s ease, background .2s ease;
-  }
-  .project-card:hover{background:var(--panel-2); border-color:var(--border-strong); border-left-color:var(--accent);}
-  .project-title{font-size:1.15rem; font-weight:600;}
-  .project-year{font-family:var(--font-mono); font-size:0.8rem; color:var(--text-faint); margin-top:0.3rem;}
-  .project-list{margin-top:1.1rem; display:flex; flex-direction:column; gap:0.65rem;}
-  .project-list li{color:var(--text-muted); font-size:0.94rem; line-height:1.55; position:relative; padding-left:1.05rem;}
-  .project-list li::before{content:"–"; position:absolute; left:0; color:var(--text-faint);}
-  .project-metrics{display:flex; flex-wrap:wrap; gap:1.5rem; margin-top:1.4rem; padding-top:1.2rem; border-top:1px solid var(--border);}
-  .metric-value{display:block; font-family:var(--font-mono); font-weight:600; color:var(--flag); font-size:1.05rem;}
-  .metric-label{display:block; font-size:0.78rem; color:var(--text-faint); margin-top:0.2rem;}
-  .project-highlights{display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:1.4rem; padding-top:1.2rem; border-top:1px solid var(--border);}
-  .project-stack{display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:1.3rem;}
-  .compact .project-list li{font-size:0.92rem;}
-  @media (max-width:900px){
-    .projects-featured, .projects-compact{grid-template-columns:1fr;}
-  }
+    /* Floating centered dark pill navbar */
+    .pill-nav-wrapper {
+      position: fixed;
+      top: 1.5rem;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: center;
+      padding: 0 1rem;
+      pointer-events: none;
+    }
 
-  /* ---------- Contact ---------- */
-  .contact-links{display:flex; flex-direction:column; gap:0; border-top:1px solid var(--border); max-width:480px;}
-  .contact-link{
-    display:flex; align-items:center; gap:0.9rem; padding:1.1rem 0.25rem; border-bottom:1px solid var(--border);
-    font-size:1rem; color:var(--text); transition:gap .2s ease, color .2s ease;
-  }
-  .contact-link:hover{gap:1.15rem; color:var(--accent);}
-  .contact-icon{
-    width:36px; height:36px; border:1px solid var(--border-strong); border-radius:var(--radius-sm);
-    display:flex; align-items:center; justify-content:center; flex-shrink:0; color:var(--text-muted);
-  }
-  .contact-link:hover .contact-icon{color:var(--accent); border-color:var(--accent);}
+    .pill-nav {
+      pointer-events: auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0.45rem 0.65rem;
+      border-radius: 9999px;
+      background: rgba(24, 3, 8, 0.72);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 214, 222, 0.22);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+      transition: all 0.3s ease;
+    }
 
-  /* ---------- Footer ---------- */
-  .footer{border-top:1px solid var(--border); padding:2.5rem 0;}
-  .footer-inner{display:flex; justify-content:space-between; flex-wrap:wrap; gap:0.5rem; font-size:0.85rem; color:var(--text-faint);}
+    .pill-nav a {
+      font-size: 0.76rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255, 235, 238, 0.78);
+      padding: 0.55rem 1.15rem;
+      border-radius: 9999px;
+      transition: all 0.22s ease;
+      white-space: nowrap;
+    }
 
-  /* ---------- Back to top ---------- */
-  .to-top{
-    position:fixed; right:1.5rem; bottom:1.5rem; z-index:90; width:44px; height:44px;
-    border-radius:50%; background:var(--panel); border:1px solid var(--border-strong);
-    display:flex; align-items:center; justify-content:center; color:var(--text);
-    opacity:0; visibility:hidden; transform:translateY(8px);
-    transition:opacity .2s ease, transform .2s ease, visibility .2s, border-color .2s ease;
-  }
-  .to-top.show{opacity:1; visibility:visible; transform:translateY(0);}
-  .to-top:hover{border-color:var(--accent); color:var(--accent);}
-</style>
+    .pill-nav a:hover,
+    .pill-nav a.active {
+      color: #ffffff;
+      background: rgba(255, 212, 220, 0.16);
+      text-shadow: 0 0 12px rgba(255, 212, 220, 0.5);
+    }
+
+    /* Editorial Italic Title ("Kushal") */
+    .hero-script-name {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 800;
+      font-size: clamp(4.2rem, 8.2vw, 7.6rem);
+      line-height: 0.96;
+      letter-spacing: -0.02em;
+      color: #ffeef0;
+      text-shadow:
+        0 12px 35px rgba(70, 0, 12, 0.55),
+        0 2px 6px rgba(0, 0, 0, 0.25);
+      background: linear-gradient(180deg, #ffffff 0%, #ffe6ea 55%, #ffc2ce 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      padding-right: 0.15em;
+    }
+
+    /* Signature Pill Buttons matching reference video */
+    .btn-pill-solid {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.9rem 2.2rem;
+      border-radius: 9999px;
+      background: linear-gradient(135deg, #ffe5ea 0%, #ffc4d0 100%);
+      color: #590310;
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      box-shadow: 0 10px 28px rgba(45, 0, 8, 0.45), inset 0 1px 1px #ffffff;
+      transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.2s ease, filter 0.2s ease;
+    }
+
+    .btn-pill-solid:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 14px 34px rgba(255, 196, 208, 0.35);
+      filter: brightness(1.04);
+    }
+
+    .btn-pill-glass {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.9rem 2.2rem;
+      border-radius: 9999px;
+      background: rgba(255, 214, 222, 0.13);
+      color: #fff2f4;
+      border: 1.5px solid rgba(255, 228, 233, 0.55);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      box-shadow: 0 10px 28px rgba(45, 0, 8, 0.28);
+      transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .btn-pill-glass:hover {
+      transform: translateY(-2px) scale(1.02);
+      background: rgba(255, 214, 222, 0.24);
+      border-color: #ffffff;
+    }
+
+    /* ==========================================
+       3D CURSOR-TRACKING CHARACTER CONTAINER
+       ========================================== */
+    .avatar-stage-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      min-height: 460px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      perspective: 1200px;
+      z-index: 3;
+    }
+
+    .avatar-3d-card {
+      position: relative;
+      width: clamp(320px, 40vw, 540px);
+      height: clamp(380px, 48vw, 600px);
+      transform-style: preserve-3d;
+      transition: transform 0.06s linear;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      user-select: none;
+    }
+
+    /* Radiant crimson rim-light aura behind the character's head */
+    .avatar-aura {
+      position: absolute;
+      width: 82%;
+      height: 76%;
+      top: 10%;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 120, 140, 0.45) 0%, rgba(227, 27, 52, 0.2) 50%, transparent 72%);
+      filter: blur(28px);
+      pointer-events: none;
+      transform: translateZ(-40px);
+    }
+
+    /* Custom Photo / Sprite Sheet Mode Container */
+    .custom-photo-wrapper {
+      position: relative;
+      width: 380px;
+      height: 460px;
+      border-radius: 32px;
+      overflow: hidden;
+      box-shadow: 0 28px 70px rgba(20, 0, 4, 0.65), 0 0 0 1px rgba(255, 214, 222, 0.22);
+      background: radial-gradient(circle at 50% 35%, #d91429, #5e0310);
+      transform-style: preserve-3d;
+    }
+
+    .custom-photo-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      transform: scale(1.06);
+      transition: transform 0.08s linear;
+    }
+
+    /* ==========================================
+       BELOW-THE-FOLD DARK RUBY OBSIDIAN SECTIONS
+       ========================================== */
+    .glass-card {
+      background: linear-gradient(145deg, rgba(32, 8, 14, 0.78) 0%, rgba(18, 4, 8, 0.88) 100%);
+      border: 1px solid rgba(255, 194, 206, 0.14);
+      border-radius: 20px;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .glass-card:hover {
+      border-color: rgba(255, 105, 135, 0.42);
+      box-shadow: 0 24px 60px rgba(184, 13, 35, 0.18);
+    }
+
+    .tag-pill {
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      padding: 0.35rem 0.85rem;
+      border-radius: 9999px;
+      background: rgba(255, 212, 220, 0.07);
+      border: 1px solid rgba(255, 212, 220, 0.16);
+      color: #ffdce2;
+      transition: all 0.2s ease;
+    }
+
+    .tag-pill:hover {
+      background: rgba(227, 27, 52, 0.28);
+      border-color: #ff6b84;
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    .section-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: #ff6b84;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .section-heading {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 800;
+      font-size: clamp(2.2rem, 4vw, 3.25rem);
+      color: #fff0f3;
+      letter-spacing: -0.01em;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #0f0306;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #4a0915;
+      border-radius: 9999px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #8f1125;
+    }
+
+    /* Modal Backdrop */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(10, 2, 4, 0.82);
+      backdrop-filter: blur(12px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.25rem;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    @media (max-width: 640px) {
+      .pill-nav a {
+        padding: 0.45rem 0.68rem;
+        font-size: 0.68rem;
+        letter-spacing: 0.08em;
+      }
+    }
+  </style>
 </head>
+
 <body>
-<a href="#main" class="skip-link">Skip to content</a>
 
-<nav class="nav" id="nav">
-  <div class="container nav-inner">
-    <a href="#hero" class="nav-mark" aria-label="Back to top">KG</a>
-    <div class="nav-menu" id="navMenu">
-      <a href="#about" class="nav-link">About</a>
-      <a href="#skills" class="nav-link">Skills</a>
-      <a href="#experience" class="nav-link">Experience</a>
-      <a href="#projects" class="nav-link">Projects</a>
-      <a href="#education" class="nav-link">Education</a>
-      <a href="#contact" class="nav-link">Contact</a>
-      <a href="Kushal_R_Gowda_Resume.pdf" download class="nav-resume">Résumé</a>
+  <!-- =========================================================
+       FLOATING CENTERED PILL NAVBAR (EXACT REFERENCE MATCH)
+       ========================================================= -->
+  <header class="pill-nav-wrapper">
+    <nav class="pill-nav" aria-label="Primary Navigation">
+      <a href="#home" class="nav-item active">Home</a>
+      <a href="#about" class="nav-item">About</a>
+      <a href="#work" class="nav-item">Work</a>
+      <a href="#projects" class="nav-item">Projects</a>
+      <a href="#skills" class="nav-item">Skills</a>
+      <a href="#contact" class="nav-item">Contact</a>
+    </nav>
+  </header>
+
+  <!-- =========================================================
+       HERO SECTION — CRIMSON STUDIO + 3D CURSOR-TRACKING AVATAR
+       ========================================================= -->
+  <section id="home" class="hero-stage">
+    <!-- Ambient floating studio particles canvas -->
+    <canvas id="studioParticles" class="absolute inset-0 w-full h-full pointer-events-none z-[1]"></canvas>
+    <div class="hero-vignette"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto w-full px-6 sm:px-10 lg:px-14 pt-24 pb-16 lg:py-12">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-4 items-center">
+
+        <!-- LEFT COLUMN: GREETING, ITALIC SERIF NAME, BIO, PILL BUTTONS -->
+        <div class="lg:col-span-6 flex flex-col items-start text-left z-20">
+          <!-- Immediate Recruiter Clarity Pill -->
+          <div
+            class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-black/25 border border-rose-200/25 backdrop-blur-md mb-6">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_10px_#34d399]"></span>
+            <span class="font-mono text-[11px] sm:text-xs tracking-wider uppercase text-rose-100/90">
+              Available Immediately · 12-Month Co-op / Internship
+            </span>
+          </div>
+
+          <p class="text-sm sm:text-base font-bold tracking-[0.26em] uppercase text-rose-100/90 mb-1">
+            HI, I'M
+          </p>
+
+          <h1 class="hero-script-name mb-5">
+            Kushal
+          </h1>
+
+          <p class="text-base sm:text-lg text-rose-100/90 max-w-md leading-relaxed font-normal mb-8 drop-shadow">
+            Crafting resilient AI/ML pipelines, fraud-detection graphs, and low-latency backend systems engineered for
+            real-world scale and security.
+          </p>
+
+          <div class="flex flex-wrap items-center gap-4">
+            <a href="Kushal_R_Gowda_Resume.pdf" download class="btn-pill-solid">
+              <span>Resume</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5m0 0l5-5m-5 5V4" />
+              </svg>
+            </a>
+            <a href="#contact" class="btn-pill-glass">
+              <span>Let's Talk</span>
+            </a>
+            <a href="#projects"
+              class="text-xs font-mono uppercase tracking-widest text-rose-200/80 hover:text-white underline underline-offset-4 ml-1 py-2">
+              Explore 5 Systems ↓
+            </a>
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN: REAL-TIME CURSOR-TRACKING 3D CHARACTER -->
+        <div class="lg:col-span-6 avatar-stage-container">
+          <div id="avatarCard" class="avatar-3d-card">
+            <div class="avatar-aura"></div>
+
+            <!-- MODE 1: Interactive 3D Stylized Rigged Character (Tracks eyes, pupils, head turn, brows, lighting & breathing) -->
+            <div id="riggedAvatarContainer" class="relative w-full h-full flex items-center justify-center">
+              <svg id="characterSvg" viewBox="0 0 600 660"
+                class="w-full h-full max-h-[560px] overflow-visible drop-shadow-[0_28px_45px_rgba(35,0,6,0.75)]">
+                <defs>
+                  <!-- Crimson Studio Backlight Glow -->
+                  <radialGradient id="crimsonBackGlow" cx="50%" cy="42%" r="50%">
+                    <stop offset="0%" stop-color="#ff6b84" stop-opacity="0.55" />
+                    <stop offset="55%" stop-color="#d91429" stop-opacity="0.2" />
+                    <stop offset="100%" stop-color="#6e0413" stop-opacity="0" />
+                  </radialGradient>
+
+                  <!-- 3D Stylized Warm Skin Shading (Pixar/Disney 3D warmth) -->
+                  <radialGradient id="faceSkinGrad" cx="44%" cy="38%" r="58%">
+                    <stop offset="0%" stop-color="#ffdfc7" />
+                    <stop offset="45%" stop-color="#f2b895" />
+                    <stop offset="82%" stop-color="#d48763" />
+                    <stop offset="100%" stop-color="#9e4736" />
+                  </radialGradient>
+
+                  <!-- Crimson Rim Light on Right Cheek/Jaw -->
+                  <linearGradient id="crimsonRimLight" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#ff8da1" stop-opacity="0.45" />
+                    <stop offset="40%" stop-color="#ff3355" stop-opacity="0" />
+                    <stop offset="80%" stop-color="#ff1e42" stop-opacity="0.55" />
+                    <stop offset="100%" stop-color="#ff758f" stop-opacity="0.8" />
+                  </linearGradient>
+
+                  <!-- Neck Shadow Gradient -->
+                  <linearGradient id="neckGrad" x1="50%" y1="0%" x2="50%" y2="100%">
+                    <stop offset="0%" stop-color="#9c513b" />
+                    <stop offset="45%" stop-color="#cc8262" />
+                    <stop offset="100%" stop-color="#a85c42" />
+                  </linearGradient>
+
+                  <!-- Blush / Subsurface Scattering Glow -->
+                  <radialGradient id="cheekBlush" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#eb4b64" stop-opacity="0.42" />
+                    <stop offset="100%" stop-color="#eb4b64" stop-opacity="0" />
+                  </radialGradient>
+
+                  <!-- Nose 3D Volume Gradient -->
+                  <linearGradient id="noseGrad" x1="20%" y1="0%" x2="85%" y2="100%">
+                    <stop offset="0%" stop-color="#ffe5d1" stop-opacity="0.9" />
+                    <stop offset="55%" stop-color="#dfa07e" stop-opacity="0.7" />
+                    <stop offset="100%" stop-color="#b56749" stop-opacity="0.95" />
+                  </linearGradient>
+
+                  <!-- Deep Espresso Volumetric Hair Gradient -->
+                  <linearGradient id="hairMainGrad" x1="15%" y1="0%" x2="85%" y2="100%">
+                    <stop offset="0%" stop-color="#3b1d1a" />
+                    <stop offset="40%" stop-color="#1e0d0c" />
+                    <stop offset="85%" stop-color="#120607" />
+                    <stop offset="100%" stop-color="#380811" />
+                  </linearGradient>
+
+                  <!-- Hair Warm Specular Highlight -->
+                  <linearGradient id="hairHighlight" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#ff7a90" stop-opacity="0.55" />
+                    <stop offset="50%" stop-color="#7a2e2e" stop-opacity="0.35" />
+                    <stop offset="100%" stop-color="#1e0d0c" stop-opacity="0" />
+                  </linearGradient>
+
+                  <!-- Eye Sclera 3D Shading -->
+                  <radialGradient id="scleraGrad" cx="50%" cy="45%" r="55%">
+                    <stop offset="0%" stop-color="#ffffff" />
+                    <stop offset="75%" stop-color="#f5e6e8" />
+                    <stop offset="100%" stop-color="#cfb1b7" />
+                  </radialGradient>
+
+                  <!-- Rich Warm Brown 3D Iris Gradient -->
+                  <radialGradient id="irisGrad" cx="45%" cy="40%" r="55%">
+                    <stop offset="0%" stop-color="#8c4a27" />
+                    <stop offset="45%" stop-color="#592810" />
+                    <stop offset="85%" stop-color="#2b1005" />
+                    <stop offset="100%" stop-color="#140602" />
+                  </radialGradient>
+
+                  <!-- Modern Dark Tech Jacket / Hoodie -->
+                  <linearGradient id="hoodieGrad" x1="20%" y1="0%" x2="80%" y2="100%">
+                    <stop offset="0%" stop-color="#2b0c13" />
+                    <stop offset="50%" stop-color="#170509" />
+                    <stop offset="100%" stop-color="#0b0204" />
+                  </linearGradient>
+
+                  <linearGradient id="hoodieRim" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#ff4d6d" stop-opacity="0.6" />
+                    <stop offset="50%" stop-color="#ff4d6d" stop-opacity="0.05" />
+                    <stop offset="100%" stop-color="#ff3355" stop-opacity="0.7" />
+                  </linearGradient>
+
+                  <!-- Eye Clip Paths for smooth blinking & iris containment -->
+                  <clipPath id="leftEyeClip">
+                    <path id="leftEyeClipPath"
+                      d="M 192 292 C 206 270, 248 270, 262 293 C 248 312, 206 312, 192 292 Z" />
+                  </clipPath>
+                  <clipPath id="rightEyeClip">
+                    <path id="rightEyeClipPath"
+                      d="M 338 293 C 352 270, 394 270, 408 292 C 394 312, 352 312, 338 293 Z" />
+                  </clipPath>
+                </defs>
+
+                <!-- Background Studio Halo -->
+                <circle id="svgHalo" cx="300" cy="290" r="240" fill="url(#crimsonBackGlow)" />
+
+                <!-- LAYER 1: SHOULDERS & TECH HOODIE (Subtle Parallax) -->
+                <g id="layerShoulders">
+                  <!-- Outer Hoodie Silhouette -->
+                  <path d="M 95 645 C 102 520, 175 468, 300 468 C 425 468, 498 520, 505 645 Z" fill="url(#hoodieGrad)"
+                    stroke="url(#hoodieRim)" stroke-width="2.5" />
+                  <!-- Inner Crewneck Tee (Warm Cream) -->
+                  <path d="M 232 478 C 255 520, 345 520, 368 478 C 355 542, 245 542, 232 478 Z" fill="#ffe6ea"
+                    opacity="0.92" />
+                  <!-- Hoodie Collar Folds & Seam Details -->
+                  <path d="M 195 485 C 215 545, 260 578, 300 584 C 340 578, 385 545, 405 485" fill="none"
+                    stroke="#3d0e18" stroke-width="5" stroke-linecap="round" />
+                  <path d="M 255 535 L 248 635 M 345 535 L 352 635" stroke="#ff5c77" stroke-width="2.2"
+                    stroke-linecap="round" opacity="0.55" />
+                </g>
+
+                <!-- LAYER 2: NECK & SHADOW -->
+                <g id="layerNeck">
+                  <path d="M 246 395 L 240 492 C 265 516, 335 516, 360 492 L 354 395 Z" fill="url(#neckGrad)" />
+                  <!-- Cast Shadow under Chin -->
+                  <path id="chinCastShadow" d="M 244 405 C 265 448, 335 448, 356 405 C 345 458, 255 458, 244 405 Z"
+                    fill="#632619" opacity="0.65" />
+                </g>
+
+                <!-- LAYER 3: BACK HAIR VOLUME & EARS -->
+                <g id="layerBackHead">
+                  <!-- Back Hair Silhouette -->
+                  <path
+                    d="M 152 265 C 138 165, 205 102, 300 102 C 395 102, 462 165, 448 265 C 458 315, 442 368, 415 390 C 370 405, 230 405, 185 390 C 158 368, 142 315, 152 265 Z"
+                    fill="url(#hairMainGrad)" />
+
+                  <!-- Left Ear -->
+                  <g id="leftEar">
+                    <path d="M 168 278 C 144 272, 138 316, 154 344 C 165 362, 182 356, 186 340 Z"
+                      fill="url(#faceSkinGrad)" stroke="#a8553d" stroke-width="1.5" />
+                    <path d="M 156 294 C 149 304, 152 326, 166 334" fill="none" stroke="#99432c" stroke-width="2.5"
+                      stroke-linecap="round" opacity="0.7" />
+                  </g>
+
+                  <!-- Right Ear -->
+                  <g id="rightEar">
+                    <path d="M 432 278 C 456 272, 462 316, 446 344 C 435 362, 418 356, 414 340 Z"
+                      fill="url(#faceSkinGrad)" stroke="#a8553d" stroke-width="1.5" />
+                    <path d="M 444 294 C 451 304, 448 326, 434 334" fill="none" stroke="#99432c" stroke-width="2.5"
+                      stroke-linecap="round" opacity="0.7" />
+                    <!-- Subtle Silver Stud / Rim Highlight -->
+                    <circle cx="445" cy="342" r="2.8" fill="#ffe6ea" opacity="0.85" />
+                  </g>
+                </g>
+
+                <!-- LAYER 4: MAIN 3D HEADSHAPE -->
+                <g id="layerFaceBase">
+                  <!-- Sculpted 3D Head & Jawline -->
+                  <path
+                    d="M 176 238 C 176 162, 228 134, 300 134 C 372 134, 424 162, 424 238 C 424 308, 412 368, 376 404 C 345 434, 322 444, 300 444 C 278 444, 255 434, 224 404 C 188 368, 176 308, 176 238 Z"
+                    fill="url(#faceSkinGrad)" />
+
+                  <!-- Crimson Studio Rim-Light Overlay -->
+                  <path
+                    d="M 176 238 C 176 162, 228 134, 300 134 C 372 134, 424 162, 424 238 C 424 308, 412 368, 376 404 C 345 434, 322 444, 300 444 C 278 444, 255 434, 224 404 C 188 368, 176 308, 176 238 Z"
+                    fill="url(#crimsonRimLight)" />
+
+                  <!-- Warm Subsurface Cheek Glows -->
+                  <ellipse cx="215" cy="336" rx="36" ry="22" fill="url(#cheekBlush)" />
+                  <ellipse cx="385" cy="336" rx="36" ry="22" fill="url(#cheekBlush)" />
+
+                  <!-- Dynamic Specular Forehead & Cheek Highlights -->
+                  <ellipse id="faceHighlightLeft" cx="235" cy="225" rx="45" ry="25" fill="#fff5eb" opacity="0.18"
+                    transform="rotate(-15 235 225)" />
+                  <ellipse id="cheekSpecLeft" cx="222" cy="322" rx="18" ry="9" fill="#fff7f0" opacity="0.26"
+                    transform="rotate(-10 222 322)" />
+                  <ellipse id="cheekSpecRight" cx="378" cy="322" rx="18" ry="9" fill="#fff7f0" opacity="0.22"
+                    transform="rotate(10 378 322)" />
+                </g>
+
+                <!-- LAYER 5: FACIAL FEATURES (EYES, PUPILS, BROWS, NOSE, SMILE) -->
+                <g id="layerFacialFeatures">
+
+                  <!-- LEFT EYE SOCKET & TRACKING IRIS -->
+                  <g id="leftEyeGroup">
+                    <!-- Soft Upper Socket Crease -->
+                    <path d="M 188 280 C 206 260, 248 262, 266 284" fill="none" stroke="#8c3f2b" stroke-width="2.2"
+                      stroke-linecap="round" opacity="0.65" />
+                    <!-- Sclera -->
+                    <path d="M 192 292 C 206 270, 248 270, 262 293 C 248 312, 206 312, 192 292 Z"
+                      fill="url(#scleraGrad)" />
+
+                    <!-- Clipped Iris & Pupil (Moves smoothly with cursor!) -->
+                    <g clip-path="url(#leftEyeClip)">
+                      <g id="leftIrisGroup">
+                        <!-- Outer Iris -->
+                        <circle cx="228" cy="291" r="16.5" fill="url(#irisGrad)" />
+                        <!-- Warm Amber Iris Ring -->
+                        <circle cx="228" cy="291" r="11" fill="none" stroke="#b86535" stroke-width="2"
+                          stroke-dasharray="3 2" opacity="0.65" />
+                        <!-- Pupil -->
+                        <circle cx="228" cy="291" r="7.2" fill="#0d0404" />
+                        <!-- Primary Studio Catchlight -->
+                        <circle id="leftCatchlight" cx="222" cy="285" r="4.2" fill="#ffffff" opacity="0.96" />
+                        <!-- Secondary Warm Rim Catchlight -->
+                        <circle cx="234" cy="297" r="2" fill="#ffccd5" opacity="0.8" />
+                      </g>
+                      <!-- Upper Eyelid Shadow on Sclera -->
+                      <path d="M 188 274 C 206 278, 248 278, 266 274 L 266 264 L 188 264 Z" fill="#521b14"
+                        opacity="0.35" />
+                      <!-- Blinking Eyelid Curtain -->
+                      <rect id="leftBlinkLid" x="185" y="262" width="85" height="55" fill="url(#faceSkinGrad)"
+                        transform="scale(1, 0)" style="transform-origin: 228px 268px;" />
+                    </g>
+
+                    <!-- Crisp Upper Lash Line -->
+                    <path d="M 190 293 C 205 268, 248 268, 264 294" fill="none" stroke="#1f0909" stroke-width="4.2"
+                      stroke-linecap="round" />
+                    <!-- Lower Waterline Highlight -->
+                    <path d="M 195 294 C 210 311, 246 311, 260 294" fill="none" stroke="#b35e47" stroke-width="1.6"
+                      stroke-linecap="round" opacity="0.8" />
+                  </g>
+
+                  <!-- RIGHT EYE SOCKET & TRACKING IRIS -->
+                  <g id="rightEyeGroup">
+                    <!-- Soft Upper Socket Crease -->
+                    <path d="M 334 284 C 352 262, 394 260, 412 280" fill="none" stroke="#8c3f2b" stroke-width="2.2"
+                      stroke-linecap="round" opacity="0.65" />
+                    <!-- Sclera -->
+                    <path d="M 338 293 C 352 270, 394 270, 408 292 C 394 312, 352 312, 338 293 Z"
+                      fill="url(#scleraGrad)" />
+
+                    <!-- Clipped Iris & Pupil (Moves smoothly with cursor!) -->
+                    <g clip-path="url(#rightEyeClip)">
+                      <g id="rightIrisGroup">
+                        <!-- Outer Iris -->
+                        <circle cx="372" cy="291" r="16.5" fill="url(#irisGrad)" />
+                        <!-- Warm Amber Iris Ring -->
+                        <circle cx="372" cy="291" r="11" fill="none" stroke="#b86535" stroke-width="2"
+                          stroke-dasharray="3 2" opacity="0.65" />
+                        <!-- Pupil -->
+                        <circle cx="372" cy="291" r="7.2" fill="#0d0404" />
+                        <!-- Primary Studio Catchlight -->
+                        <circle id="rightCatchlight" cx="366" cy="285" r="4.2" fill="#ffffff" opacity="0.96" />
+                        <!-- Secondary Warm Rim Catchlight -->
+                        <circle cx="378" cy="297" r="2" fill="#ffccd5" opacity="0.8" />
+                      </g>
+                      <!-- Upper Eyelid Shadow on Sclera -->
+                      <path d="M 334 274 C 352 278, 394 278, 412 274 L 412 264 L 334 264 Z" fill="#521b14"
+                        opacity="0.35" />
+                      <!-- Blinking Eyelid Curtain -->
+                      <rect id="rightBlinkLid" x="330" y="262" width="85" height="55" fill="url(#faceSkinGrad)"
+                        transform="scale(1, 0)" style="transform-origin: 372px 268px;" />
+                    </g>
+
+                    <!-- Crisp Upper Lash Line -->
+                    <path d="M 336 294 C 352 268, 395 268, 410 293" fill="none" stroke="#1f0909" stroke-width="4.2"
+                      stroke-linecap="round" />
+                    <!-- Lower Waterline Highlight -->
+                    <path d="M 340 294 C 354 311, 390 311, 405 294" fill="none" stroke="#b35e47" stroke-width="1.6"
+                      stroke-linecap="round" opacity="0.8" />
+                  </g>
+
+                  <!-- EXPRESSIVE EYEBROWS (Track cursor vertical angle) -->
+                  <g id="eyebrowsGroup">
+                    <path id="leftBrow" d="M 184 256 C 204 242, 244 243, 268 255 C 246 250, 206 250, 184 256 Z"
+                      fill="#1e0b0a" stroke="#1e0b0a" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" />
+                    <path id="rightBrow" d="M 332 255 C 356 243, 396 242, 416 256 C 394 250, 354 250, 332 255 Z"
+                      fill="#1e0b0a" stroke="#1e0b0a" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" />
+                  </g>
+
+                  <!-- 3D SCULPTED NOSE (Higher parallax for 3D depth) -->
+                  <g id="noseGroup">
+                    <!-- Nose Side Shadow -->
+                    <path
+                      d="M 294 272 C 292 302, 276 334, 280 346 C 286 355, 314 355, 322 346 C 325 338, 312 304, 305 272 Z"
+                      fill="url(#noseGrad)" />
+                    <!-- Nose Tip & Nostril Contours -->
+                    <path d="M 278 344 C 285 354, 294 356, 300 356 C 306 356, 315 354, 322 344" fill="none"
+                      stroke="#8c3c27" stroke-width="2.8" stroke-linecap="round" />
+                    <!-- Soft 3D Bridge & Tip Highlight -->
+                    <path d="M 299 278 L 299 332" stroke="#fff4eb" stroke-width="3.5" stroke-linecap="round"
+                      opacity="0.55" />
+                    <circle cx="300" cy="343" r="5.5" fill="#fff4eb" opacity="0.45" />
+                  </g>
+
+                  <!-- CONFIDENT WARM SMILE / LIPS -->
+                  <g id="mouthGroup">
+                    <!-- Upper Lip -->
+                    <path
+                      d="M 262 382 C 278 377, 290 380, 300 382 C 310 380, 322 377, 338 382 C 322 390, 278 390, 262 382 Z"
+                      fill="#b8524b" />
+                    <!-- Lower Lip Cushion -->
+                    <path d="M 265 383 C 280 402, 320 402, 335 383 C 320 390, 280 390, 265 383 Z" fill="#d46a63" />
+                    <!-- Center Mouth Line with Subtle Smirk -->
+                    <path d="M 258 381 C 278 389, 322 389, 342 379" fill="none" stroke="#6e221f" stroke-width="2.5"
+                      stroke-linecap="round" />
+                    <!-- Lower Lip Specular Shine -->
+                    <ellipse cx="300" cy="392" rx="14" ry="2.8" fill="#ffd9df" opacity="0.55" />
+                  </g>
+                </g>
+
+                <!-- LAYER 6: FOREGROUND VOLUMETRIC HAIR & FLOATING STRANDS (Highest Parallax) -->
+                <g id="layerFrontHair">
+                  <!-- Main Swooping Wavy Fringe -->
+                  <path
+                    d="M 164 252 C 162 175, 218 118, 302 116 C 382 114, 436 168, 434 248 C 422 205, 392 175, 348 168 C 362 198, 345 232, 315 246 C 332 215, 325 182, 295 174 C 282 208, 250 238, 212 248 C 232 216, 235 190, 222 178 C 195 198, 178 225, 164 252 Z"
+                    fill="url(#hairMainGrad)" />
+
+                  <!-- Stylized 3D Hair Volume Ribbons -->
+                  <path d="M 192 152 C 238 115, 335 112, 392 158 C 345 138, 245 140, 192 152 Z"
+                    fill="url(#hairHighlight)" />
+                  <path d="M 248 142 C 285 165, 312 205, 315 245" fill="none" stroke="#ff6b84" stroke-width="2.2"
+                    stroke-linecap="round" opacity="0.38" />
+                  <path d="M 342 150 C 378 175, 405 215, 416 255" fill="none" stroke="#ff6b84" stroke-width="2.5"
+                    stroke-linecap="round" opacity="0.45" />
+                  <path d="M 172 242 C 162 285, 168 320, 180 342" fill="none" stroke="#1e0b0a" stroke-width="8"
+                    stroke-linecap="round" />
+                  <path d="M 428 242 C 438 285, 432 320, 420 342" fill="none" stroke="#1e0b0a" stroke-width="8"
+                    stroke-linecap="round" />
+                </g>
+              </svg>
+
+              <!-- Interactive Cursor Tracking Status Badge -->
+              <div
+                class="absolute bottom-2 left-1/2 -translate-x-1/2 flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/45 border border-rose-200/20 backdrop-blur-md text-[11px] font-mono text-rose-100/90 pointer-events-none whitespace-nowrap">
+                <span class="inline-block w-2 h-2 rounded-full bg-rose-400 animate-ping"></span>
+                <span>Move cursor — 3D gaze &amp; head tracking active</span>
+              </div>
+            </div>
+
+            <!-- MODE 2: Custom Photo / AI 3D Render Mode (Uses kushal-photo.jpg or user-uploaded 3D avatar) -->
+            <div id="customPhotoContainer" class="hidden flex-col items-center justify-center">
+              <div class="custom-photo-wrapper">
+                <img id="customAvatarImg" src="kushal-photo.jpg"
+                  onerror="this.src='https://placehold.co/600x720/8c071b/ffe8ec?text=Kushal+R+Gowda'"
+                  alt="Kushal R Gowda Portrait" />
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-[#3b020a]/80 via-transparent to-transparent pointer-events-none">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Floating Mode Switcher & AI Prompt Helper (Bottom Right of Hero Stage) -->
+          <div
+            class="absolute -bottom-3 right-0 sm:right-4 z-30 flex items-center gap-1.5 p-1 rounded-full bg-black/55 border border-rose-200/25 backdrop-blur-xl text-xs">
+            <button id="btnMode3D" class="px-3 py-1.5 rounded-full bg-rose-500/80 text-white font-semibold transition">
+              3D Tracking Rig
+            </button>
+            <button id="btnModePhoto" class="px-3 py-1.5 rounded-full text-rose-200/80 hover:text-white transition">
+              My Photo
+            </button>
+            <button id="btnOpenPromptModal"
+              class="px-3 py-1.5 rounded-full text-rose-200/80 hover:text-white transition flex items-center gap-1"
+              title="Get the exact ChatGPT prompt from the video or upload your custom 3D image">
+              <span>✨ AI 3D Guide</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
     </div>
-    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
-      <span class="nav-toggle-icon"></span>
-    </button>
+  </section>
+
+  <!-- =========================================================
+       ABOUT SECTION — STATS, PORTRAIT & ENGINEERING PHILOSOPHY
+       ========================================================= -->
+  <section id="about" class="py-24 px-6 sm:px-10 lg:px-14 border-t border-rose-200/10 relative">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-4">
+        <div>
+          <span class="section-eyebrow">01 / Profile &amp; Philosophy</span>
+          <h2 class="section-heading mt-2">Engineered for High-Stakes Reliability</h2>
+        </div>
+        <p class="font-mono text-xs text-rose-200/60">
+          Malnad College of Engineering · Hassan, Karnataka
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        <!-- Portrait Card -->
+        <div class="lg:col-span-4">
+          <div class="glass-card p-4 relative group">
+            <div class="aspect-[4/5] rounded-xl overflow-hidden bg-gradient-to-b from-rose-900/40 to-black relative">
+              <img src="kushal-photo.jpg"
+                onerror="this.style.display='none'; document.getElementById('fallbackMonogram').style.display='flex';"
+                alt="Portrait of Kushal R Gowda"
+                class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-500" />
+              <!-- Graceful Fallback if kushal-photo.jpg is not in the local directory -->
+              <div id="fallbackMonogram" style="display:none;"
+                class="w-full h-full flex-col items-center justify-center bg-gradient-to-br from-[#9e0b22] via-[#4a0410] to-[#120205] p-6 text-center">
+                <span class="font-serif italic text-6xl font-bold text-rose-100 mb-3">KG</span>
+                <span class="font-mono text-xs uppercase tracking-widest text-rose-200/80">Kushal R Gowda</span>
+                <span class="text-[11px] text-rose-200/50 mt-1">AI/ML &amp; Backend Systems</span>
+              </div>
+            </div>
+            <div class="mt-4 flex items-center justify-between px-1">
+              <div>
+                <h3 class="font-semibold text-white text-sm">Kushal R Gowda</h3>
+                <p class="text-xs text-rose-200/65">B.E. Computer Science (2023–2027)</p>
+              </div>
+              <a href="https://github.com/kushalpvt07-design" target="_blank" rel="noopener"
+                class="px-3 py-1.5 rounded-lg bg-rose-500/15 border border-rose-300/20 text-xs font-mono text-rose-200 hover:bg-rose-500/30 transition">
+                GitHub ↗
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bio & Quantifiable Stat Cards -->
+        <div class="lg:col-span-8 space-y-8">
+          <div class="glass-card p-8 sm:p-10 space-y-5">
+            <p class="text-lg sm:text-xl text-rose-50/95 leading-relaxed font-medium">
+              I build systems — <span class="text-rose-400 font-semibold">fraud-detection graphs, multi-agent LLM
+                pipelines, and real-time inference at the edge</span> — and test them like they'll be trusted with real
+              money and real access.
+            </p>
+            <p class="text-sm sm:text-base text-rose-100/75 leading-relaxed">
+              I'm a Computer Science undergraduate at Malnad College of Engineering specializing in AI/ML systems and
+              backend infrastructure. Alongside shipping production-grade agentic workflows during my internship at
+              <strong class="text-white">Webveer</strong>, my engineering work focuses on security and latency
+              bottlenecks: catching circular mule-rings in UPI transaction networks, enforcing zero-trust RBAC directly
+              inside Qdrant vector search, and compiling PyTorch models into C++ ONNX Runtime for sub-5ms edge
+              execution.
+            </p>
+            <p class="text-sm sm:text-base text-rose-100/75 leading-relaxed">
+              I'd rather prove a system works than just claim it does — so every flagship repository includes
+              cost-justified decision thresholds, self-published security audits, and automated Pytest suites.
+            </p>
+          </div>
+
+          <!-- 4 Key Stat Cards -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            <div class="glass-card p-5">
+              <span class="font-mono text-3xl font-bold text-rose-400 block">8.54</span>
+              <span class="text-xs text-rose-100/70 mt-1 block">Current CGPA (B.E. CSE)</span>
+            </div>
+            <div class="glass-card p-5">
+              <span class="font-mono text-3xl font-bold text-rose-400 block">2027</span>
+              <span class="text-xs text-rose-100/70 mt-1 block">Graduation · Co-op Ready</span>
+            </div>
+            <div class="glass-card p-5">
+              <span class="font-mono text-3xl font-bold text-rose-400 block">5</span>
+              <span class="text-xs text-rose-100/70 mt-1 block">Audited End-to-End Systems</span>
+            </div>
+            <div class="glass-card p-5">
+              <span class="font-mono text-3xl font-bold text-rose-400 block">AWS</span>
+              <span class="text-xs text-rose-100/70 mt-1 block">Certified Cloud Practitioner</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       WORK EXPERIENCE SECTION (UPGRADED WITH SPECIFICS & DATES)
+       ========================================================= -->
+  <section id="work" class="py-24 px-6 sm:px-10 lg:px-14 border-t border-rose-200/10">
+    <div class="max-w-7xl mx-auto">
+      <div class="mb-12">
+        <span class="section-eyebrow">02 / Industry Experience</span>
+        <h2 class="section-heading mt-2">Where I've Shipped Code</h2>
+      </div>
+
+      <div class="glass-card p-8 sm:p-10 border-l-4 border-l-rose-500">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-6 border-b border-rose-200/10">
+          <div>
+            <h3 class="text-xl sm:text-2xl font-bold text-white">AI Platform Development Engineer Intern</h3>
+            <p class="font-mono text-sm text-rose-400 mt-1">Webveer · AI Platform Engineering Team</p>
+          </div>
+          <div class="flex items-center gap-3">
+            <span
+              class="px-3.5 py-1.5 rounded-full bg-rose-500/15 border border-rose-400/30 font-mono text-xs text-rose-200">
+              2025 – 2026
+            </span>
+          </div>
+        </div>
+
+        <ul class="mt-6 space-y-4 text-sm sm:text-base text-rose-100/80">
+          <li class="flex items-start gap-3">
+            <span class="text-rose-400 font-mono mt-1">▹</span>
+            <span>Architected and refined stateful, multi-step <strong class="text-white">agentic AI workflows</strong>
+              and tool-calling pipelines within Webveer's core AI platform, enabling deterministic task routing and
+              structured JSON outputs across LLM providers.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-rose-400 font-mono mt-1">▹</span>
+            <span>Engineered backend API orchestration services with <strong class="text-white">automated retry/fallback
+                cascades, prompt-injection guardrails, and token-budget telemetry</strong> to keep generative AI
+              endpoints reliable under concurrent user load.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-rose-400 font-mono mt-1">▹</span>
+            <span>Collaborated with senior platform engineers on RAG context-window optimization, evaluation harnesses,
+              and low-latency streaming responses.</span>
+          </li>
+        </ul>
+
+        <div class="mt-6 pt-6 border-t border-rose-200/10 flex flex-wrap gap-2">
+          <span class="tag-pill">Agentic Workflows</span>
+          <span class="tag-pill">LLM Orchestration</span>
+          <span class="tag-pill">FastAPI / Async Python</span>
+          <span class="tag-pill">RAG Pipelines</span>
+          <span class="tag-pill">Structured Outputs</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       PROJECTS SECTION — WITH DIRECT REPO LINKS & ARCHITECTURE VIEWER
+       ========================================================= -->
+  <section id="projects" class="py-24 px-6 sm:px-10 lg:px-14 border-t border-rose-200/10">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-4">
+        <div>
+          <span class="section-eyebrow">03 / Featured Engineering Systems</span>
+          <h2 class="section-heading mt-2">Built, Benchmarked &amp; Audited</h2>
+        </div>
+        <p class="text-sm text-rose-200/70 max-w-md">
+          Click <span class="text-rose-300 font-mono">System Architecture ⚡</span> on any card to inspect the dataflow
+          pipeline and verification details.
+        </p>
+      </div>
+
+      <!-- TOP 2 FLAGSHIP PROJECTS -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+
+        <!-- PROJECT 1: UPI Mule-Ring Sentinel -->
+        <article class="glass-card p-8 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <span
+                class="font-mono text-xs uppercase tracking-widest px-3 py-1 rounded-full bg-rose-500/20 text-rose-300 border border-rose-400/30">
+                Flagship · Graph ML &amp; FinTech Security
+              </span>
+              <span class="font-mono text-xs text-rose-200/50">2026</span>
+            </div>
+
+            <h3 class="text-2xl font-bold text-white mb-4">UPI Mule-Ring Sentinel</h3>
+
+            <ul class="space-y-3 text-sm text-rose-100/80 leading-relaxed">
+              <li class="flex items-start gap-2.5">
+                <span class="text-rose-400 font-mono">–</span>
+                <span>Engineered an 18-feature graph topology pipeline — cycle participation, PageRank, Louvain
+                  community closure — over a 3,000-account synthetic UPI network, achieving <strong
+                    class="text-white">0.974 ROC-AUC at 0.87 recall</strong> on a ring-disjoint held-out split.</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-rose-400 font-mono">–</span>
+                <span>Selected the operating alert threshold by minimizing an explicit <strong class="text-white">rupee
+                    cost matrix</strong> (₹2,00,000 per missed mule vs. ₹15,000 per false alert) rather than chasing F1:
+                  ₹4.72M modeled cost vs. ₹12.8M for the higher-precision baseline (within 4.9% of hindsight
+                  optimal).</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-rose-400 font-mono">–</span>
+                <span>Enforced a defense-only action ceiling via 3 independent rails and an import-time enum sweep,
+                  backed by a <strong class="text-white">self-published 26-finding codebase audit</strong> and a <strong
+                    class="text-white">375-case Pytest suite</strong>.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="mt-6">
+            <!-- Metrics Strip -->
+            <div class="grid grid-cols-3 gap-3 py-4 border-y border-rose-200/10 mb-5">
+              <div>
+                <span class="font-mono text-lg font-bold text-rose-400 block">0.974</span>
+                <span class="text-[11px] text-rose-200/60">Ring-Disjoint AUC</span>
+              </div>
+              <div>
+                <span class="font-mono text-lg font-bold text-rose-400 block">₹8.08M</span>
+                <span class="text-[11px] text-rose-200/60">Modeled Loss Saved</span>
+              </div>
+              <div>
+                <span class="font-mono text-lg font-bold text-rose-400 block">375 Cases</span>
+                <span class="text-[11px] text-rose-200/60">Automated Test Suite</span>
+              </div>
+            </div>
+
+            <!-- Tech Stack -->
+            <div class="flex flex-wrap gap-2 mb-6">
+              <span class="tag-pill">XGBoost</span>
+              <span class="tag-pill">NetworkX</span>
+              <span class="tag-pill">FastAPI</span>
+              <span class="tag-pill">Pandas</span>
+              <span class="tag-pill">Pytest</span>
+            </div>
+
+            <!-- Action Links (Directly addresses critique #1) -->
+            <div class="flex flex-wrap items-center gap-3 pt-2">
+              <button onclick="openArchModal('upi')"
+                class="px-4 py-2 rounded-xl bg-rose-500 hover:bg-rose-600 text-white text-xs font-mono font-semibold transition shadow-lg shadow-rose-950/50">
+                System Architecture &amp; 26-Audit ⚡
+              </button>
+              <a href="https://github.com/kushalpvt07-design?tab=repositories" target="_blank" rel="noopener"
+                class="px-4 py-2 rounded-xl bg-white/5 hover:bg-white/15 border border-rose-200/20 text-rose-100 text-xs font-mono transition">
+                GitHub Repo ↗
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- PROJECT 2: Omni-Agent Trading Nexus -->
+        <article class="glass-card p-8 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <span
+                class="font-mono text-xs uppercase tracking-widest px-3 py-1 rounded-full bg-rose-500/20 text-rose-300 border border-rose-400/30">
+                Flagship · Multi-Agent Systems
+              </span>
+              <span class="font-mono text-xs text-rose-200/50">2026</span>
+            </div>
+
+            <h3 class="text-2xl font-bold text-white mb-4">Omni-Agent Trading Nexus</h3>
+
+            <ul class="space-y-3 text-sm text-rose-100/80 leading-relaxed">
+              <li class="flex items-start gap-2.5">
+                <span class="text-rose-400 font-mono">–</span>
+                <span>Architected a 4-agent financial intelligence swarm in <strong
+                    class="text-white">LangGraph</strong>, executing news sentiment analysis and technical indicator
+                  parsing in parallel DAG branches to cut end-to-end signal latency by <strong class="text-white">40%
+                    vs. sequential agent chains</strong>.</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-rose-400 font-mono">–</span>
+                <span>Engineered a fault-tolerant LLM orchestration layer with <strong class="text-white">Gemini API
+                    model cascading</strong> (Pro → Flash fallback) and jittered exponential backoff, maintaining
+                  <strong class="text-white">99.8% request completion across 1,200+ simulated HTTP 429 rate-limit
+                    spikes</strong>.</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-rose-400 font-mono">–</span>
+                <span>Streamed live agent reasoning states and risk-scored trade syntheses to a React dashboard over
+                  bi-directional WebSockets.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="mt-6">
+            <div class="grid grid-cols-3 gap-3 py-4 border-y border-rose-200/10 mb-5">
+              <div>
+                <span class="font-mono text-lg font-bold text-rose-400 block">-40%</span>
+                <span class="text-[11px] text-rose-200/60">vs. Sequential Chain</span>
+              </div>
+              <div>
+                <span class="font-mono text-lg font-bold text-rose-400 block">99.8%</span>
+                <span class="text-[11px] text-rose-200/60">429 Stress-Test Completion</span>
+              </div>
+              <div>
+                <span class="font-mono text-lg font-bold text-rose-400 block">4 Agents</span>
+                <span class="text-[11px] text-rose-200/60">Parallel LangGraph DAG</span>
+              </div>
+            </div>
+
+            <div class="flex flex-wrap gap-2 mb-6">
+              <span class="tag-pill">LangGraph</span>
+              <span class="tag-pill">Gemini 2.5 API</span>
+              <span class="tag-pill">FastAPI</span>
+              <span class="tag-pill">WebSockets</span>
+              <span class="tag-pill">React</span>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-3 pt-2">
+              <button onclick="openArchModal('omni')"
+                class="px-4 py-2 rounded-xl bg-rose-500 hover:bg-rose-600 text-white text-xs font-mono font-semibold transition shadow-lg shadow-rose-950/50">
+                System Architecture ⚡
+              </button>
+              <a href="https://github.com/kushalpvt07-design?tab=repositories" target="_blank" rel="noopener"
+                class="px-4 py-2 rounded-xl bg-white/5 hover:bg-white/15 border border-rose-200/20 text-rose-100 text-xs font-mono transition">
+                GitHub Repo ↗
+              </a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- BOTTOM 3 SYSTEMS PROJECTS -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+        <!-- PROJECT 3: Aegis-Edge -->
+        <article class="glass-card p-7 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between text-xs font-mono text-rose-300/80 mb-2">
+              <span>Edge ML &amp; C++ Runtime</span>
+              <span>2025–2026</span>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-3">Aegis-Edge</h3>
+            <ul class="space-y-2.5 text-sm text-rose-100/75 leading-relaxed">
+              <li>• Ingested 50Hz CNC vibration telemetry over native Kafka (KRaft), streaming micro-batches via PySpark
+                to trigger automated kill-switches above 85% anomaly risk.</li>
+              <li>• Compiled PyTorch 1D-CNN weights into a native <strong class="text-white">C++ ONNX Runtime</strong>
+                pipeline, eliminating Python GIL/serialization overhead for <strong class="text-white">&lt;5ms inference
+                  latency</strong>.</li>
+              <li>• Implemented custom C++ arena memory pooling and INT8 quantization, reducing peak RAM by 25% at 45+
+                FPS.</li>
+            </ul>
+          </div>
+
+          <div class="mt-6">
+            <div class="flex items-center justify-between py-3 border-y border-rose-200/10 mb-4 font-mono text-xs">
+              <span><strong class="text-rose-400">&lt;5ms</strong> C++ Latency</span>
+              <span><strong class="text-rose-400">45+</strong> FPS</span>
+              <span><strong class="text-rose-400">-25%</strong> Peak RAM</span>
+            </div>
+            <div class="flex flex-wrap gap-1.5 mb-5">
+              <span class="tag-pill">C++</span>
+              <span class="tag-pill">ONNX Runtime</span>
+              <span class="tag-pill">PyTorch</span>
+              <span class="tag-pill">Kafka (KRaft)</span>
+              <span class="tag-pill">PySpark</span>
+            </div>
+            <div class="flex items-center gap-2.5">
+              <button onclick="openArchModal('aegis')"
+                class="px-3.5 py-2 rounded-xl bg-rose-500/20 hover:bg-rose-500 text-rose-200 hover:text-white border border-rose-400/30 text-xs font-mono transition">
+                Architecture ⚡
+              </button>
+              <a href="https://github.com/kushalpvt07-design?tab=repositories" target="_blank" rel="noopener"
+                class="px-3.5 py-2 rounded-xl bg-white/5 hover:bg-white/15 border border-rose-200/15 text-xs font-mono text-rose-100 transition">
+                GitHub ↗
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- PROJECT 4: VIGIL-SOAR -->
+        <article class="glass-card p-7 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between text-xs font-mono text-rose-300/80 mb-2">
+              <span>SecOps Automation</span>
+              <span>2026</span>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-3">VIGIL-SOAR</h3>
+            <ul class="space-y-2.5 text-sm text-rose-100/75 leading-relaxed">
+              <li>• Engineered an event-driven Security Orchestration (SOAR) pipeline in LangGraph to ingest, correlate,
+                and triage SIEM network alerts in real time.</li>
+              <li>• Partitioned forensics across 3 specialized <strong class="text-white">Groq (Llama 3.1)</strong>
+                agents with strict Pydantic schemas, cutting Active Directory triage latency by <strong
+                  class="text-white">65% vs. single-agent sequential replay</strong> across synthetic SIEM incident
+                batches.</li>
+            </ul>
+          </div>
+
+          <div class="mt-6">
+            <div class="flex items-center justify-between py-3 border-y border-rose-200/10 mb-4 font-mono text-xs">
+              <span><strong class="text-rose-400">65%</strong> Faster Triage</span>
+              <span><strong class="text-rose-400">3 Agents</strong> Llama 3.1</span>
+            </div>
+            <div class="flex flex-wrap gap-1.5 mb-5">
+              <span class="tag-pill">LangGraph</span>
+              <span class="tag-pill">Groq LPU API</span>
+              <span class="tag-pill">Llama 3.1</span>
+              <span class="tag-pill">Pydantic</span>
+            </div>
+            <div class="flex items-center gap-2.5">
+              <button onclick="openArchModal('vigil')"
+                class="px-3.5 py-2 rounded-xl bg-rose-500/20 hover:bg-rose-500 text-rose-200 hover:text-white border border-rose-400/30 text-xs font-mono transition">
+                Architecture ⚡
+              </button>
+              <a href="https://github.com/kushalpvt07-design?tab=repositories" target="_blank" rel="noopener"
+                class="px-3.5 py-2 rounded-xl bg-white/5 hover:bg-white/15 border border-rose-200/15 text-xs font-mono text-rose-100 transition">
+                GitHub ↗
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- PROJECT 5: Zero-Trust RAG Engine -->
+        <article class="glass-card p-7 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between text-xs font-mono text-rose-300/80 mb-2">
+              <span>Vector Security &amp; RBAC</span>
+              <span>2026</span>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-3">Zero-Trust RAG Engine</h3>
+            <ul class="space-y-2.5 text-sm text-rose-100/75 leading-relaxed">
+              <li>• Enforced Role-Based Access Control (RBAC) directly at the vector-retrieval layer in <strong
+                  class="text-white">Qdrant</strong> using mandatory metadata pre-filtering to guarantee multi-tenant
+                isolation and zero cross-tenant context leakage.</li>
+              <li>• Orchestrated a deterministic LangGraph gatekeeper state machine that short-circuits unauthorized
+                queries prior to LLM invocation, preventing prompt-injected disclosures.</li>
+            </ul>
+          </div>
+
+          <div class="mt-6">
+            <div class="flex items-center justify-between py-3 border-y border-rose-200/10 mb-4 font-mono text-xs">
+              <span><strong class="text-rose-400">0%</strong> Cross-Tenant Leak</span>
+              <span><strong class="text-rose-400">Pre-Filter</strong> Qdrant RBAC</span>
+            </div>
+            <div class="flex flex-wrap gap-1.5 mb-5">
+              <span class="tag-pill">Qdrant</span>
+              <span class="tag-pill">LangGraph</span>
+              <span class="tag-pill">FastAPI</span>
+              <span class="tag-pill">Docker</span>
+              <span class="tag-pill">Gemini API</span>
+            </div>
+            <div class="flex items-center gap-2.5">
+              <button onclick="openArchModal('rag')"
+                class="px-3.5 py-2 rounded-xl bg-rose-500/20 hover:bg-rose-500 text-rose-200 hover:text-white border border-rose-400/30 text-xs font-mono transition">
+                Architecture ⚡
+              </button>
+              <a href="https://github.com/kushalpvt07-design?tab=repositories" target="_blank" rel="noopener"
+                class="px-3.5 py-2 rounded-xl bg-white/5 hover:bg-white/15 border border-rose-200/15 text-xs font-mono text-rose-100 transition">
+                GitHub ↗
+              </a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       SKILLS & EDUCATION SECTION
+       ========================================================= -->
+  <section id="skills" class="py-24 px-6 sm:px-10 lg:px-14 border-t border-rose-200/10">
+    <div class="max-w-7xl mx-auto">
+      <div class="mb-14">
+        <span class="section-eyebrow">04 / Technical Arsenal &amp; Credentials</span>
+        <h2 class="section-heading mt-2">Stack &amp; Foundations</h2>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <!-- Skills Matrix -->
+        <div class="lg:col-span-8 glass-card p-8 space-y-6">
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pb-5 border-b border-rose-200/10 items-baseline">
+            <h3 class="text-sm font-semibold text-rose-300 uppercase tracking-wider font-mono">Languages</h3>
+            <div class="sm:col-span-2 flex flex-wrap gap-2">
+              <span class="tag-pill">Python</span>
+              <span class="tag-pill">C / C++</span>
+              <span class="tag-pill">TypeScript / JavaScript</span>
+              <span class="tag-pill">SQL</span>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pb-5 border-b border-rose-200/10 items-baseline">
+            <h3 class="text-sm font-semibold text-rose-300 uppercase tracking-wider font-mono">AI &amp; Machine Learning
+            </h3>
+            <div class="sm:col-span-2 flex flex-wrap gap-2">
+              <span class="tag-pill">LangGraph</span>
+              <span class="tag-pill">Multi-Agent Systems</span>
+              <span class="tag-pill">RAG Architectures</span>
+              <span class="tag-pill">PyTorch</span>
+              <span class="tag-pill">ONNX Runtime</span>
+              <span class="tag-pill">XGBoost</span>
+              <span class="tag-pill">NetworkX Graph ML</span>
+              <span class="tag-pill">SentenceTransformers</span>
+              <span class="tag-pill">INT8 Quantization</span>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pb-5 border-b border-rose-200/10 items-baseline">
+            <h3 class="text-sm font-semibold text-rose-300 uppercase tracking-wider font-mono">LLM &amp; Vector Stack
+            </h3>
+            <div class="sm:col-span-2 flex flex-wrap gap-2">
+              <span class="tag-pill">Gemini API (2.5 Pro / Flash)</span>
+              <span class="tag-pill">Groq API (Llama 3.1)</span>
+              <span class="tag-pill">Qdrant Vector DB</span>
+              <span class="tag-pill">Semantic Search &amp; RBAC</span>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 items-baseline">
+            <h3 class="text-sm font-semibold text-rose-300 uppercase tracking-wider font-mono">Backend, Data &amp;
+              DevOps</h3>
+            <div class="sm:col-span-2 flex flex-wrap gap-2">
+              <span class="tag-pill">FastAPI</span>
+              <span class="tag-pill">Node.js &amp; Express</span>
+              <span class="tag-pill">Apache Kafka (KRaft)</span>
+              <span class="tag-pill">Apache Spark (PySpark)</span>
+              <span class="tag-pill">PostgreSQL</span>
+              <span class="tag-pill">WebSockets</span>
+              <span class="tag-pill">Docker</span>
+              <span class="tag-pill">CI/CD &amp; Pytest</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Education & Certifications -->
+        <div class="lg:col-span-4 space-y-6">
+          <div class="glass-card p-7 border-l-4 border-l-rose-400">
+            <span class="font-mono text-xs text-rose-300 uppercase">Education</span>
+            <h3 class="text-lg font-bold text-white mt-1">Malnad College of Engineering</h3>
+            <p class="text-sm text-rose-200/80 mt-1">B.E. in Computer Science &amp; Engineering</p>
+            <div class="mt-4 pt-4 border-t border-rose-200/10 flex items-center justify-between text-xs font-mono">
+              <span class="text-rose-300 font-semibold">CGPA: 8.54 / 10</span>
+              <span class="text-rose-200/60">Expected May 2027</span>
+            </div>
+          </div>
+
+          <div class="glass-card p-7 border-l-4 border-l-amber-400">
+            <span class="font-mono text-xs text-amber-300 uppercase">Cloud Certification</span>
+            <h3 class="text-lg font-bold text-white mt-1">AWS Certified Cloud Practitioner</h3>
+            <p class="text-xs text-rose-200/70 mt-2 leading-relaxed">
+              Validated cloud security, IAM least-privilege architecture, VPC networking, and serverless compute
+              fundamentals.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       CONTACT SECTION
+       ========================================================= -->
+  <section id="contact" class="py-24 px-6 sm:px-10 lg:px-14 border-t border-rose-200/10">
+    <div class="max-w-5xl mx-auto text-center">
+      <span class="section-eyebrow">05 / Let's Build Together</span>
+      <h2 class="hero-script-name !text-5xl sm:!text-7xl mt-3 mb-6">Let's Talk</h2>
+      <p class="text-base sm:text-lg text-rose-100/75 max-w-xl mx-auto mb-12">
+        Available immediately for a <strong class="text-white">12-month co-op or internship</strong> in AI/ML
+        Engineering, LLM Infrastructure, or Backend Development.
+      </p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-left">
+        <a href="mailto:kushalpvt07@gmail.com"
+          class="glass-card p-5 flex items-center gap-4 hover:border-rose-400 transition group">
+          <div
+            class="w-11 h-11 rounded-xl bg-rose-500/20 border border-rose-400/30 flex items-center justify-center text-rose-300 group-hover:bg-rose-500 group-hover:text-white transition">
+            ✉
+          </div>
+          <div class="min-w-0">
+            <span class="text-[11px] font-mono uppercase text-rose-300/70 block">Email</span>
+            <span class="text-xs sm:text-sm font-semibold text-white truncate block">kushalpvt07@gmail.com</span>
+          </div>
+        </a>
+
+        <a href="tel:+919380163399"
+          class="glass-card p-5 flex items-center gap-4 hover:border-rose-400 transition group">
+          <div
+            class="w-11 h-11 rounded-xl bg-rose-500/20 border border-rose-400/30 flex items-center justify-center text-rose-300 group-hover:bg-rose-500 group-hover:text-white transition">
+            ☎
+          </div>
+          <div>
+            <span class="text-[11px] font-mono uppercase text-rose-300/70 block">Phone</span>
+            <span class="text-xs sm:text-sm font-semibold text-white block">+91 93801 63399</span>
+          </div>
+        </a>
+
+        <a href="https://www.linkedin.com/in/kushal-r-gowda-7104b5372" target="_blank" rel="noopener"
+          class="glass-card p-5 flex items-center gap-4 hover:border-rose-400 transition group">
+          <div
+            class="w-11 h-11 rounded-xl bg-rose-500/20 border border-rose-400/30 flex items-center justify-center font-mono font-bold text-rose-300 group-hover:bg-rose-500 group-hover:text-white transition">
+            in
+          </div>
+          <div>
+            <span class="text-[11px] font-mono uppercase text-rose-300/70 block">LinkedIn</span>
+            <span class="text-xs sm:text-sm font-semibold text-white block">/in/kushal-r-gowda ↗</span>
+          </div>
+        </a>
+
+        <a href="https://github.com/kushalpvt07-design" target="_blank" rel="noopener"
+          class="glass-card p-5 flex items-center gap-4 hover:border-rose-400 transition group">
+          <div
+            class="w-11 h-11 rounded-xl bg-rose-500/20 border border-rose-400/30 flex items-center justify-center font-mono font-bold text-rose-300 group-hover:bg-rose-500 group-hover:text-white transition">
+            &lt;/&gt;
+          </div>
+          <div>
+            <span class="text-[11px] font-mono uppercase text-rose-300/70 block">GitHub</span>
+            <span class="text-xs sm:text-sm font-semibold text-white block">kushalpvt07-design ↗</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLEAN PROFESSIONAL FOOTER (Removed "Built from résumé") -->
+  <footer class="py-10 px-6 sm:px-10 lg:px-14 border-t border-rose-200/10 text-xs text-rose-200/50 font-mono">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p>© 2026 Kushal R Gowda · Engineered in Hassan, Karnataka</p>
+      <p>AI/ML Systems · Graph Fraud Detection · Low-Latency Backend</p>
+    </div>
+  </footer>
+
+  <!-- =========================================================
+       MODAL 1: INTERACTIVE SYSTEM ARCHITECTURE & AUDIT VIEWER
+       ========================================================= -->
+  <div id="archModal" class="modal-backdrop" role="dialog" aria-modal="true">
+    <div class="glass-card max-w-3xl w-full p-6 sm:p-8 border border-rose-300/30 relative max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between pb-4 border-b border-rose-200/15">
+        <div>
+          <span id="modalEyebrow" class="font-mono text-xs uppercase text-rose-400">System Architecture Blueprint</span>
+          <h3 id="modalTitle" class="text-xl sm:text-2xl font-bold text-white mt-0.5">UPI Mule-Ring Sentinel</h3>
+        </div>
+        <button onclick="closeArchModal()"
+          class="w-9 h-9 rounded-full bg-white/10 hover:bg-rose-500 text-white flex items-center justify-center font-bold transition">
+          ✕
+        </button>
+      </div>
+
+      <div id="modalBody" class="mt-6 space-y-6 text-sm text-rose-100/85"></div>
+    </div>
   </div>
-</nav>
 
-<main id="main">
-  <section id="hero" class="hero">
-    <canvas class="hero-canvas" id="netCanvas" aria-hidden="true"></canvas>
-    <div class="hero-scrim" aria-hidden="true"></div>
-    <div class="container hero-inner">
-      <p class="hero-status"><span class="status-dot" aria-hidden="true"></span>Open to a 12-month co-op or internship — available immediately</p>
-      <h1 class="hero-name">Kushal R Gowda</h1>
-      <p class="hero-role">AI/ML engineer and backend developer based in Hassan, Karnataka.</p>
-      <p class="hero-bio">I build systems — fraud-detection graphs, multi-agent LLM pipelines, real-time inference at the edge — and test them like they'll be trusted with real money and real access.</p>
-      <div class="hero-actions">
-        <a href="#projects" class="btn btn-primary">View projects</a>
-        <a href="Kushal_R_Gowda_Resume.pdf" download class="btn btn-ghost">Download résumé</a>
+  <!-- =========================================================
+       MODAL 2: VIDEO REEL AI 3D CHARACTER PROMPT & CUSTOM IMAGE UPLOADER
+       ========================================================= -->
+  <div id="promptModal" class="modal-backdrop" role="dialog" aria-modal="true">
+    <div class="glass-card max-w-2xl w-full p-6 sm:p-8 border border-rose-300/30 relative max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between pb-4 border-b border-rose-200/15">
+        <div>
+          <span class="font-mono text-xs uppercase text-rose-400">From the Reel Tutorial</span>
+          <h3 class="text-xl font-bold text-white mt-0.5">Custom 3D Character &amp; ChatGPT Prompt</h3>
+        </div>
+        <button id="btnClosePromptModal"
+          class="w-9 h-9 rounded-full bg-white/10 hover:bg-rose-500 text-white flex items-center justify-center font-bold transition">
+          ✕
+        </button>
       </div>
-    </div>
-    <a href="#about" class="hero-scroll-cue" aria-label="Scroll to About section">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-    </a>
-  </section>
 
-  <section id="about" class="section">
-    <div class="container section-inner">
-      <div class="section-head"><h2>About</h2></div>
-      <div class="section-body">
-        <div class="about-layout">
-          <div class="about-photo">
-            <img src="kushal-photo.jpg" alt="Portrait of Kushal R Gowda" loading="lazy">
-          </div>
-          <div class="about-content">
-            <p class="about-text">I'm a Computer Science undergraduate at Malnad College of Engineering, specializing in AI/ML systems and backend engineering. I've built Retrieval-Augmented Generation pipelines, orchestrated multi-agent LLM systems, and shipped low-latency backend infrastructure, alongside time on a real AI platform team at Webveer working on agentic and generative AI features. Most of what I build sits close to a security or reliability problem: catching fraud rings in transaction graphs, enforcing zero-trust access at the vector-search layer, or triaging security logs in real time. I'd rather prove a system works than just say it does, so I lean on cost-justified thresholds, audited codebases, and test suites that outnumber my confidence.</p>
-            <div class="stat-strip">
-              <div class="stat"><span class="stat-value">8.54</span><span class="stat-label">CGPA</span></div>
-              <div class="stat"><span class="stat-value">2027</span><span class="stat-label">Expected graduation</span></div>
-              <div class="stat"><span class="stat-value">5</span><span class="stat-label">End-to-end projects shipped</span></div>
-              <div class="stat"><span class="stat-value">AWS</span><span class="stat-label">Certified Cloud Practitioner</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+      <div class="mt-5 space-y-5 text-sm text-rose-100/85">
+        <p>
+          Your portfolio already includes a <strong>live 60fps 3D cursor-tracking character rig</strong> out of the box!
+          If you also want to generate a custom 3D Pixar-style portrait from your own photo (like Step 01 in the video
+          reel) and preview it right now:
+        </p>
 
-  <section id="skills" class="section">
-    <div class="container section-inner">
-      <div class="section-head"><h2>Skills</h2></div>
-      <div class="section-body">
-        <div class="skill-row">
-          <h3 class="skill-cat">Languages</h3>
-          <div class="skill-tags">
-            <span class="tag">Python</span><span class="tag">C/C++</span><span class="tag">JavaScript/TypeScript</span><span class="tag">SQL</span>
+        <div class="p-4 rounded-xl bg-black/45 border border-rose-300/20 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-xs uppercase text-rose-300 font-semibold">Step 01 — ChatGPT Image Prompt</span>
+            <button id="btnCopyPrompt"
+              class="px-3 py-1 rounded-lg bg-rose-500 hover:bg-rose-600 text-white font-mono text-xs transition">
+              Copy Prompt
+            </button>
           </div>
+          <pre id="chatgptPromptText"
+            class="text-xs font-mono text-rose-100/90 whitespace-pre-wrap bg-black/40 p-3 rounded-lg border border-white/10 leading-relaxed">Upload your photo first. Create a stylized 3D character portrait based on my uploaded photo. Keep my exact facial identity, hairstyle, skin tone, and expression, rendered in a polished 3D animated movie style with soft studio lighting, warm rim highlights, and a solid vibrant crimson red background (#c8102e).</pre>
         </div>
-        <div class="skill-row">
-          <h3 class="skill-cat">AI &amp; machine learning</h3>
-          <div class="skill-tags">
-            <span class="tag">Machine Learning</span><span class="tag">Deep Learning</span><span class="tag">NLP</span><span class="tag">RAG</span><span class="tag">MLOps</span><span class="tag">Multi-Agent Systems</span><span class="tag">Prompt Engineering</span><span class="tag">LangGraph</span><span class="tag">PyTorch</span><span class="tag">ONNX Runtime</span><span class="tag">SentenceTransformers</span>
-          </div>
-        </div>
-        <div class="skill-row">
-          <h3 class="skill-cat">LLM integration</h3>
-          <div class="skill-tags">
-            <span class="tag">Gemini API (1.5 Pro/Flash)</span><span class="tag">Groq API</span><span class="tag">Llama 3.1</span><span class="tag">Semantic Vector Search</span>
-          </div>
-        </div>
-        <div class="skill-row">
-          <h3 class="skill-cat">Backend &amp; systems</h3>
-          <div class="skill-tags">
-            <span class="tag">FastAPI</span><span class="tag">Node.js</span><span class="tag">Express.js</span><span class="tag">REST API Design</span><span class="tag">Async Programming</span><span class="tag">WebSockets</span><span class="tag">Event-Driven Architecture</span><span class="tag">Distributed Systems</span><span class="tag">React.js</span>
-          </div>
-        </div>
-        <div class="skill-row">
-          <h3 class="skill-cat">Data engineering</h3>
-          <div class="skill-tags">
-            <span class="tag">Apache Kafka (KRaft)</span><span class="tag">Apache Spark (PySpark)</span><span class="tag">PostgreSQL</span><span class="tag">Qdrant</span><span class="tag">SQLite</span>
-          </div>
-        </div>
-        <div class="skill-row">
-          <h3 class="skill-cat">Tools &amp; DevOps</h3>
-          <div class="skill-tags">
-            <span class="tag">Docker</span><span class="tag">Git</span><span class="tag">CI/CD</span><span class="tag">System Design</span><span class="tag">Data Structures &amp; Algorithms</span><span class="tag">Pytest</span>
-          </div>
+
+        <div class="p-4 rounded-xl bg-black/45 border border-rose-300/20 space-y-3">
+          <span class="font-mono text-xs uppercase text-rose-300 font-semibold block">Step 02 — Test Any Custom Image
+            Live in the Hero</span>
+          <p class="text-xs text-rose-200/75">
+            Select any image file from your computer (or save your ChatGPT render as <code>kushal-photo.jpg</code> in
+            your project folder) to test it with 3D mouse-tilt tracking:
+          </p>
+          <input type="file" id="avatarFileInput" accept="image/*"
+            class="block w-full text-xs text-rose-200 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-rose-500 file:text-white hover:file:bg-rose-600 cursor-pointer" />
         </div>
       </div>
     </div>
-  </section>
-
-  <section id="experience" class="section">
-    <div class="container section-inner">
-      <div class="section-head"><h2>Experience</h2></div>
-      <div class="section-body">
-        <article class="entry">
-          <div class="entry-mark" aria-hidden="true"></div>
-          <div class="entry-content">
-            <h3 class="entry-title">AI Platform Development Engineer Intern</h3>
-            <p class="entry-org">Webveer</p>
-            <ul class="entry-list">
-              <li>Contributed to the development of agentic AI and generative AI capabilities within the company's AI platform.</li>
-              <li>Collaborated with the engineering team on building and refining LLM-driven agentic workflows and generative AI features.</li>
-            </ul>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section id="projects" class="section">
-    <div class="container section-inner">
-      <div class="section-head"><h2>Projects</h2></div>
-      <div class="section-body">
-        <p class="section-intro">Five systems designed, built, and stress-tested end to end — spanning fraud detection, multi-agent orchestration, edge inference, and security automation.</p>
-
-        <div class="projects-featured">
-          <article class="project-card">
-            <h3 class="project-title">UPI Mule-Ring Sentinel</h3>
-            <p class="project-year">2026</p>
-            <ul class="project-list">
-              <li>Engineered an 18-feature graph pipeline — cycle participation, PageRank, Louvain closure — over a 3,000-account synthetic UPI network, reaching 0.974 ROC-AUC at 0.87 recall on a ring-disjoint held-out split.</li>
-              <li>Chose the alert threshold by minimizing a rupee cost matrix (₹2,00,000 per miss vs. ₹15,000 per false alert) instead of optimizing F1: ₹4.72M in modeled cost against ₹12.8M for the higher-precision alternative, within 4.9% of the hindsight-optimal threshold.</li>
-              <li>Held the service to a defense-only action ceiling through three independent rails and an import-time enum sweep, then published a 26-finding audit of my own codebase alongside a 375-case test suite.</li>
-            </ul>
-            <div class="project-metrics">
-              <div class="metric"><span class="metric-value">0.974</span><span class="metric-label">ROC-AUC</span></div>
-              <div class="metric"><span class="metric-value">3,000</span><span class="metric-label">account network</span></div>
-              <div class="metric"><span class="metric-value">375</span><span class="metric-label">case test suite</span></div>
-            </div>
-            <div class="project-stack">
-              <span class="tag">XGBoost</span><span class="tag">NetworkX</span><span class="tag">FastAPI</span><span class="tag">Pandas</span><span class="tag">Pytest</span>
-            </div>
-          </article>
-
-          <article class="project-card">
-            <h3 class="project-title">Omni-Agent Trading Nexus</h3>
-            <p class="project-year">2026</p>
-            <ul class="project-list">
-              <li>Architected a 4-agent financial swarm in LangGraph, parallelizing sentiment analysis and technical parsing to cut trade-signal generation latency by 40%.</li>
-              <li>Built a resilient LLM orchestration pipeline with Gemini API model cascading and exponential backoff, holding 99.8% uptime against HTTP 429 throttling.</li>
-            </ul>
-            <div class="project-metrics">
-              <div class="metric"><span class="metric-value">40%</span><span class="metric-label">latency reduction</span></div>
-              <div class="metric"><span class="metric-value">99.8%</span><span class="metric-label">uptime</span></div>
-              <div class="metric"><span class="metric-value">4</span><span class="metric-label">agent swarm</span></div>
-            </div>
-            <div class="project-stack">
-              <span class="tag">LangGraph</span><span class="tag">Gemini API</span><span class="tag">FastAPI</span><span class="tag">WebSockets</span><span class="tag">React</span>
-            </div>
-          </article>
-        </div>
-
-        <div class="projects-compact">
-          <article class="project-card compact">
-            <h3 class="project-title">Aegis-Edge</h3>
-            <p class="project-year">2025 – 2026</p>
-            <ul class="project-list">
-              <li>Ingested 50Hz CNC vibration telemetry over a native Kafka (KRaft) broker, streaming micro-batches through PySpark to trigger automated kill-switches above 85% risk thresholds.</li>
-              <li>Compiled PyTorch 1D-CNN models into a C++ ONNX Runtime pipeline, bypassing Python serialization for sub-5ms edge latency.</li>
-              <li>Added custom C++ memory pooling and INT8 quantization, cutting peak RAM by 25% and lifting throughput to 45+ FPS.</li>
-            </ul>
-            <div class="project-metrics">
-              <div class="metric"><span class="metric-value">&lt;5ms</span><span class="metric-label">edge latency</span></div>
-              <div class="metric"><span class="metric-value">45+</span><span class="metric-label">FPS</span></div>
-              <div class="metric"><span class="metric-value">-25%</span><span class="metric-label">peak RAM</span></div>
-            </div>
-            <div class="project-stack">
-              <span class="tag">PyTorch</span><span class="tag">ONNX Runtime</span><span class="tag">C++</span><span class="tag">Kafka</span><span class="tag">PySpark</span>
-            </div>
-          </article>
-
-          <article class="project-card compact">
-            <h3 class="project-title">VIGIL-SOAR</h3>
-            <p class="project-year">2026</p>
-            <ul class="project-list">
-              <li>Engineered an event-driven Security Orchestration (SOAR) pipeline in LangGraph to process and triage SIEM network logs in real time.</li>
-              <li>Split the workload across 3 specialized Groq (Llama 3.1) agents, cutting Active Directory forensics and threat-response time by 65%.</li>
-            </ul>
-            <div class="project-metrics">
-              <div class="metric"><span class="metric-value">65%</span><span class="metric-label">faster response</span></div>
-              <div class="metric"><span class="metric-value">3</span><span class="metric-label">specialized agents</span></div>
-            </div>
-            <div class="project-stack">
-              <span class="tag">LangGraph</span><span class="tag">Groq API</span><span class="tag">Llama 3.1</span><span class="tag">Pydantic</span>
-            </div>
-          </article>
-
-          <article class="project-card compact">
-            <h3 class="project-title">Zero-Trust RAG Engine</h3>
-            <p class="project-year">2026</p>
-            <ul class="project-list">
-              <li>Enforced RBAC at the vector-search layer via Qdrant, using strict metadata pre-filtering to isolate tenant data and eliminate LLM context leakage.</li>
-              <li>Orchestrated a deterministic LangGraph state machine to short-circuit unauthorized queries before they reach the Gemini API, preventing hallucinated disclosures.</li>
-            </ul>
-            <div class="project-highlights">
-              <span class="tag">RBAC at vector layer</span><span class="tag">Tenant isolation</span><span class="tag">Deterministic routing</span>
-            </div>
-            <div class="project-stack">
-              <span class="tag">LangGraph</span><span class="tag">Qdrant</span><span class="tag">Docker</span><span class="tag">FastAPI</span><span class="tag">Gemini API</span>
-            </div>
-          </article>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="education" class="section">
-    <div class="container section-inner">
-      <div class="section-head"><h2>Education</h2></div>
-      <div class="section-body">
-        <article class="entry" style="margin-bottom:2.25rem;">
-          <div class="entry-mark" aria-hidden="true"></div>
-          <div class="entry-content">
-            <h3 class="entry-title">Malnad College of Engineering</h3>
-            <p class="entry-org">B.E., Computer Science and Engineering · Hassan, Karnataka</p>
-            <p class="entry-detail">CGPA 8.54, expected May 2027. Eligible for a 12-month co-op or internship, available immediately.</p>
-          </div>
-        </article>
-        <article class="entry">
-          <div class="entry-mark" aria-hidden="true"></div>
-          <div class="entry-content">
-            <h3 class="entry-title">Certification</h3>
-            <p class="entry-detail" style="margin-top:0.35rem;">AWS Certified Cloud Practitioner</p>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section id="contact" class="section">
-    <div class="container section-inner">
-      <div class="section-head"><h2>Contact</h2></div>
-      <div class="section-body">
-        <p class="section-intro">Open to 12-month co-op and internship roles in AI/ML engineering and backend development. Email is the fastest way to reach me.</p>
-        <div class="contact-links">
-          <a class="contact-link" href="mailto:kushalpvt07@gmail.com">
-            <span class="contact-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span>
-            kushalpvt07@gmail.com
-          </a>
-          <a class="contact-link" href="tel:+919380163399">
-            <span class="contact-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.6 10.8c1.4 2.8 3.7 5.1 6.5 6.5l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.6.6.6 0 1 .4 1 1v3.5c0 .6-.4 1-1 1C10.4 21 3 13.6 3 4.5c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg></span>
-            +91 93801 63399
-          </a>
-          <a class="contact-link" href="https://www.linkedin.com/in/kushal-r-gowda-7104b5372" target="_blank" rel="noopener">
-            <span class="contact-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><text x="12" y="16.5" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" font-weight="700" fill="currentColor" stroke="none">in</text></svg></span>
-            linkedin.com/in/kushal-r-gowda
-          </a>
-          <a class="contact-link" href="https://github.com/kushalpvt07-design" target="_blank" rel="noopener">
-            <span class="contact-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><text x="12" y="16" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9.5" font-weight="700" fill="currentColor" stroke="none">&lt;/&gt;</text></svg></span>
-            github.com/kushalpvt07-design
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-</main>
-
-<footer class="footer">
-  <div class="container footer-inner">
-    <p>Kushal R Gowda — Hassan, Karnataka</p>
-    <p class="footer-year">Built from résumé, last updated 2026</p>
   </div>
-</footer>
 
-<button class="to-top" id="toTop" aria-label="Back to top">
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
-</button>
+  <!-- =========================================================
+       INTERACTIVE CURSOR TRACKING, PARTICLES & ARCHITECTURE MODALS JS
+       ========================================================= -->
+  <script>
+    (function () {
+      "use strict";
 
-<script>
-(function(){
-  "use strict";
+      /* ---------------------------------------------------------
+         1. REAL-TIME 3D CURSOR TRACKING ENGINE (60FPS LERP)
+         --------------------------------------------------------- */
+      const heroStage = document.getElementById("home");
+      const avatarCard = document.getElementById("avatarCard");
 
-  /* Nav background + active link */
-  var nav = document.getElementById('nav');
-  var sections = document.querySelectorAll('main section[id]');
-  var navLinks = document.querySelectorAll('.nav-link');
+      // SVG Rig Layers
+      const leftIris = document.getElementById("leftIrisGroup");
+      const rightIris = document.getElementById("rightIrisGroup");
+      const leftCatchlight = document.getElementById("leftCatchlight");
+      const rightCatchlight = document.getElementById("rightCatchlight");
+      const eyebrowsGroup = document.getElementById("eyebrowsGroup");
+      const noseGroup = document.getElementById("noseGroup");
+      const mouthGroup = document.getElementById("mouthGroup");
+      const layerFaceBase = document.getElementById("layerFaceBase");
+      const layerFacialFeatures = document.getElementById("layerFacialFeatures");
+      const layerFrontHair = document.getElementById("layerFrontHair");
+      const layerBackHead = document.getElementById("layerBackHead");
+      const layerShoulders = document.getElementById("layerShoulders");
+      const leftEar = document.getElementById("leftEar");
+      const rightEar = document.getElementById("rightEar");
+      const chinCastShadow = document.getElementById("chinCastShadow");
+      const faceHighlightLeft = document.getElementById("faceHighlightLeft");
+      const svgHalo = document.getElementById("svgHalo");
+      const customAvatarImg = document.getElementById("customAvatarImg");
 
-  window.addEventListener('scroll', function(){
-    if(window.scrollY > 40){ nav.classList.add('scrolled'); } else { nav.classList.remove('scrolled'); }
-  }, {passive:true});
+      // Normalized target (-1 to +1) and smoothed current coordinates
+      let targetX = 0;
+      let targetY = 0;
+      let currentX = 0;
+      let currentY = 0;
 
-  if('IntersectionObserver' in window){
-    var navObs = new IntersectionObserver(function(entries){
-      entries.forEach(function(entry){
-        if(entry.isIntersecting){
-          var id = entry.target.id;
-          navLinks.forEach(function(l){
-            l.classList.toggle('active', l.getAttribute('href') === '#' + id);
+      function handlePointerMove(clientX, clientY) {
+        const vw = window.innerWidth || 1;
+        const vh = window.innerHeight || 1;
+
+        // Update CSS spotlight variables on the crimson hero stage
+        const pctX = ((clientX / vw) * 100).toFixed(1) + "%";
+        const pctY = ((clientY / vh) * 100).toFixed(1) + "%";
+        heroStage.style.setProperty("--cursor-x", pctX);
+        heroStage.style.setProperty("--cursor-y", pctY);
+
+        // Calculate normalized vector relative to the avatar center
+        const rect = avatarCard.getBoundingClientRect();
+        const centerX = rect.left + rect.width * 0.5;
+        const centerY = rect.top + rect.height * 0.44;
+
+        targetX = Math.max(-1, Math.min(1, (clientX - centerX) / (vw * 0.42)));
+        targetY = Math.max(-1, Math.min(1, (clientY - centerY) / (vh * 0.42)));
+      }
+
+      window.addEventListener("mousemove", function (e) {
+        handlePointerMove(e.clientX, e.clientY);
+      }, { passive: true });
+
+      window.addEventListener("touchmove", function (e) {
+        if (e.touches && e.touches[0]) {
+          handlePointerMove(e.touches[0].clientX, e.touches[0].clientY);
+        }
+      }, { passive: true });
+
+      function animateCharacter(timestamp) {
+        // Smooth damping interpolation
+        currentX += (targetX - currentX) * 0.11;
+        currentY += (targetY - currentY) * 0.11;
+
+        // Subtle organic breathing oscillation
+        const breathY = Math.sin(timestamp * 0.0022) * 3.2;
+
+        // 1. Whole 3D Card Perspective Tilt
+        const rotY = currentX * 13;
+        const rotX = -currentY * 10;
+        avatarCard.style.transform =
+          "rotateY(" + rotY.toFixed(2) + "deg) rotateX(" + rotX.toFixed(2) + "deg) translateY(" + breathY.toFixed(2) + "px)";
+
+        // 2. Multi-Layer 2.5D/3D Parallax Shifts (Simulates true 3D head turn)
+        const headShiftX = currentX * 14;
+        const headShiftY = currentY * 9;
+        layerFaceBase.setAttribute("transform", "translate(" + headShiftX + "," + headShiftY + ")");
+
+        // Facial features shift slightly further than the head base to create 3D curvature
+        const featShiftX = currentX * 21;
+        const featShiftY = currentY * 13;
+        layerFacialFeatures.setAttribute("transform", "translate(" + featShiftX + "," + featShiftY + ")");
+
+        // Front hair has the strongest parallax
+        const hairShiftX = currentX * 24;
+        const hairShiftY = currentY * 14;
+        layerFrontHair.setAttribute("transform", "translate(" + hairShiftX + "," + hairShiftY + ")");
+
+        // Back head & ears move inversely to simulate 3D head rotation
+        const backShiftX = currentX * 6;
+        const backShiftY = currentY * 4;
+        layerBackHead.setAttribute("transform", "translate(" + backShiftX + "," + backShiftY + ")");
+        leftEar.setAttribute("transform", "translate(" + (-currentX * 7) + "," + (-currentY * 3) + ")");
+        rightEar.setAttribute("transform", "translate(" + (-currentX * 7) + "," + (-currentY * 3) + ")");
+
+        // Shoulders & Halo subtle counter-parallax
+        layerShoulders.setAttribute("transform", "translate(" + (currentX * 5) + "," + (currentY * 2.5) + ")");
+        svgHalo.setAttribute("transform", "translate(" + (-currentX * 18) + "," + (-currentY * 12) + ")");
+
+        // 3. Eye Iris & Pupil Tracking (Tracks cursor smoothly inside the eye sockets)
+        const eyeX = currentX * 11.5;
+        const eyeY = currentY * 7.5;
+        leftIris.setAttribute("transform", "translate(" + eyeX + "," + eyeY + ")");
+        rightIris.setAttribute("transform", "translate(" + eyeX + "," + eyeY + ")");
+
+        // Specular catchlight micro-shift
+        leftCatchlight.setAttribute("transform", "translate(" + (currentX * 2.5) + "," + (currentY * 2.5) + ")");
+        rightCatchlight.setAttribute("transform", "translate(" + (currentX * 2.5) + "," + (currentY * 2.5) + ")");
+
+        // 4. Expressive Eyebrows, 3D Nose Tip & Smile micro-parallax
+        eyebrowsGroup.setAttribute("transform", "translate(" + (currentX * 3.5) + "," + (currentY * -4.5) + ")");
+        noseGroup.setAttribute("transform", "translate(" + (currentX * 5.5) + "," + (currentY * 3.5) + ")");
+        mouthGroup.setAttribute("transform", "translate(" + (currentX * 3) + "," + (currentY * 2) + ")");
+        chinCastShadow.setAttribute("transform", "translate(" + (currentX * 10) + "," + (currentY * 8) + ")");
+        faceHighlightLeft.setAttribute("transform", "translate(" + (-currentX * 12) + "," + (-currentY * 8) + ") rotate(-15 235 225)");
+
+        // If Custom Photo Mode is active, pan/tilt image smoothly
+        if (customAvatarImg) {
+          customAvatarImg.style.transform =
+            "scale(1.08) translate(" + (currentX * 12).toFixed(1) + "px, " + (currentY * 10).toFixed(1) + "px)";
+        }
+
+        requestAnimationFrame(animateCharacter);
+      }
+
+      requestAnimationFrame(animateCharacter);
+
+      /* ---------------------------------------------------------
+         2. NATURAL RANDOM BLINKING ANIMATION
+         --------------------------------------------------------- */
+      const leftBlinkLid = document.getElementById("leftBlinkLid");
+      const rightBlinkLid = document.getElementById("rightBlinkLid");
+
+      function triggerBlink() {
+        if (!leftBlinkLid || !rightBlinkLid) return;
+        leftBlinkLid.style.transition = "transform 0.07s ease-in";
+        rightBlinkLid.style.transition = "transform 0.07s ease-in";
+        leftBlinkLid.setAttribute("transform", "scale(1, 1.05)");
+        rightBlinkLid.setAttribute("transform", "scale(1, 1.05)");
+
+        setTimeout(function () {
+          leftBlinkLid.style.transition = "transform 0.11s ease-out";
+          rightBlinkLid.style.transition = "transform 0.11s ease-out";
+          leftBlinkLid.setAttribute("transform", "scale(1, 0)");
+          rightBlinkLid.setAttribute("transform", "scale(1, 0)");
+        }, 85);
+
+        const nextBlink = 2400 + Math.random() * 3600;
+        setTimeout(triggerBlink, nextBlink);
+      }
+      setTimeout(triggerBlink, 2000);
+
+      /* ---------------------------------------------------------
+         3. AMBIENT STUDIO PARTICLES IN HERO
+         --------------------------------------------------------- */
+      const pCanvas = document.getElementById("studioParticles");
+      if (pCanvas && pCanvas.getContext) {
+        const pCtx = pCanvas.getContext("2d");
+        let pw = 0, ph = 0;
+        const particles = [];
+
+        function resizeParticles() {
+          pw = pCanvas.width = heroStage.offsetWidth;
+          ph = pCanvas.height = heroStage.offsetHeight;
+        }
+        resizeParticles();
+        window.addEventListener("resize", resizeParticles);
+
+        for (let i = 0; i < 32; i++) {
+          particles.push({
+            x: Math.random() * pw,
+            y: Math.random() * ph,
+            r: Math.random() * 2 + 0.6,
+            vx: (Math.random() - 0.5) * 0.3,
+            vy: -Math.random() * 0.35 - 0.1,
+            alpha: Math.random() * 0.45 + 0.12
           });
         }
-      });
-    }, {rootMargin:'-45% 0px -50% 0px'});
-    sections.forEach(function(s){ navObs.observe(s); });
-  }
 
-  /* Mobile menu */
-  var navToggle = document.getElementById('navToggle');
-  var navMenu = document.getElementById('navMenu');
-  navToggle.addEventListener('click', function(){
-    var open = navMenu.classList.toggle('open');
-    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-  });
-  navMenu.querySelectorAll('a').forEach(function(a){
-    a.addEventListener('click', function(){
-      navMenu.classList.remove('open');
-      navToggle.setAttribute('aria-expanded', 'false');
-    });
-  });
+        function drawParticles() {
+          pCtx.clearRect(0, 0, pw, ph);
+          for (let i = 0; i < particles.length; i++) {
+            const p = particles[i];
+            p.x += p.vx - currentX * 0.25;
+            p.y += p.vy - currentY * 0.15;
+            if (p.y < -10) p.y = ph + 10;
+            if (p.x < -10) p.x = pw + 10;
+            if (p.x > pw + 10) p.x = -10;
 
-  /* Back to top */
-  var toTop = document.getElementById('toTop');
-  window.addEventListener('scroll', function(){
-    if(window.scrollY > 600){ toTop.classList.add('show'); } else { toTop.classList.remove('show'); }
-  }, {passive:true});
-  toTop.addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });
-
-  /* Hero network graph */
-  var canvas = document.getElementById('netCanvas');
-  if(!canvas || !canvas.getContext) return;
-  var ctx = canvas.getContext('2d');
-  var hero = document.getElementById('hero');
-  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var dpr = Math.min(window.devicePixelRatio || 1, 2);
-  var w, h, nodes = [];
-  var mouse = {x:-9999, y:-9999};
-  var ACCENT = '86,199,217';
-  var FLAG = '231,168,87';
-
-  function resize(){
-    w = canvas.width = Math.floor(hero.offsetWidth * dpr);
-    h = canvas.height = Math.floor(hero.offsetHeight * dpr);
-    canvas.style.width = hero.offsetWidth + 'px';
-    canvas.style.height = hero.offsetHeight + 'px';
-  }
-
-  function initNodes(){
-    var count = Math.min(64, Math.max(24, Math.floor((w * h) / 70000)));
-    nodes = [];
-    for(var i = 0; i < count; i++){
-      nodes.push({
-        x: Math.random() * w,
-        y: Math.random() * h,
-        vx: (Math.random() - 0.5) * 0.22 * dpr,
-        vy: (Math.random() - 0.5) * 0.22 * dpr,
-        r: (Math.random() * 1.3 + 1.1) * dpr,
-        flagged: false,
-        flagT: 0
-      });
-    }
-  }
-
-  hero.addEventListener('mousemove', function(e){
-    var rect = hero.getBoundingClientRect();
-    mouse.x = (e.clientX - rect.left) * dpr;
-    mouse.y = (e.clientY - rect.top) * dpr;
-  });
-  hero.addEventListener('mouseleave', function(){ mouse.x = -9999; mouse.y = -9999; });
-
-  function frame(){
-    var maxDist = 125 * dpr;
-    ctx.clearRect(0, 0, w, h);
-
-    for(var i = 0; i < nodes.length; i++){
-      var n = nodes[i];
-      n.x += n.vx; n.y += n.vy;
-      if(n.x < 0 || n.x > w) n.vx *= -1;
-      if(n.y < 0 || n.y > h) n.vy *= -1;
-      var dx = n.x - mouse.x, dy = n.y - mouse.y;
-      var d2 = dx * dx + dy * dy;
-      var influence = 110 * dpr;
-      if(d2 < influence * influence){
-        var d = Math.sqrt(d2) || 1;
-        n.x += (dx / d) * 0.35 * dpr;
-        n.y += (dy / d) * 0.35 * dpr;
+            pCtx.beginPath();
+            pCtx.fillStyle = "rgba(255, 220, 228, " + p.alpha + ")";
+            pCtx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            pCtx.fill();
+          }
+          requestAnimationFrame(drawParticles);
+        }
+        drawParticles();
       }
-      if(n.flagT > 0){ n.flagT--; if(n.flagT === 0) n.flagged = false; }
-    }
 
-    if(!reduceMotion && Math.random() < 0.006 && nodes.length){
-      var pick = nodes[Math.floor(Math.random() * nodes.length)];
-      pick.flagged = true; pick.flagT = 100;
-    }
+      /* ---------------------------------------------------------
+         4. AVATAR MODE SWITCHER & AI PROMPT MODAL
+         --------------------------------------------------------- */
+      const btnMode3D = document.getElementById("btnMode3D");
+      const btnModePhoto = document.getElementById("btnModePhoto");
+      const riggedAvatarContainer = document.getElementById("riggedAvatarContainer");
+      const customPhotoContainer = document.getElementById("customPhotoContainer");
+      const promptModal = document.getElementById("promptModal");
+      const btnOpenPromptModal = document.getElementById("btnOpenPromptModal");
+      const btnClosePromptModal = document.getElementById("btnClosePromptModal");
+      const btnCopyPrompt = document.getElementById("btnCopyPrompt");
+      const avatarFileInput = document.getElementById("avatarFileInput");
 
-    for(var a = 0; a < nodes.length; a++){
-      for(var b = a + 1; b < nodes.length; b++){
-        var na = nodes[a], nb = nodes[b];
-        var ddx = na.x - nb.x, ddy = na.y - nb.y;
-        var dist = Math.sqrt(ddx * ddx + ddy * ddy);
-        if(dist < maxDist){
-          var op = (1 - dist / maxDist) * 0.22;
-          ctx.strokeStyle = 'rgba(' + ACCENT + ',' + op + ')';
-          ctx.lineWidth = dpr;
-          ctx.beginPath();
-          ctx.moveTo(na.x, na.y);
-          ctx.lineTo(nb.x, nb.y);
-          ctx.stroke();
+      function setAvatarMode(mode) {
+        if (mode === "3d") {
+          riggedAvatarContainer.classList.remove("hidden");
+          riggedAvatarContainer.classList.add("flex");
+          customPhotoContainer.classList.add("hidden");
+          customPhotoContainer.classList.remove("flex");
+          btnMode3D.className = "px-3 py-1.5 rounded-full bg-rose-500/80 text-white font-semibold transition";
+          btnModePhoto.className = "px-3 py-1.5 rounded-full text-rose-200/80 hover:text-white transition";
+        } else {
+          riggedAvatarContainer.classList.add("hidden");
+          riggedAvatarContainer.classList.remove("flex");
+          customPhotoContainer.classList.remove("hidden");
+          customPhotoContainer.classList.add("flex");
+          btnModePhoto.className = "px-3 py-1.5 rounded-full bg-rose-500/80 text-white font-semibold transition";
+          btnMode3D.className = "px-3 py-1.5 rounded-full text-rose-200/80 hover:text-white transition";
         }
       }
-    }
 
-    for(var k = 0; k < nodes.length; k++){
-      var nd = nodes[k];
-      ctx.beginPath();
-      ctx.fillStyle = nd.flagged ? 'rgba(' + FLAG + ',0.95)' : 'rgba(' + ACCENT + ',0.5)';
-      ctx.arc(nd.x, nd.y, nd.flagged ? nd.r * 2.1 : nd.r, 0, Math.PI * 2);
-      ctx.fill();
-      if(nd.flagged){
-        ctx.beginPath();
-        ctx.strokeStyle = 'rgba(' + FLAG + ',0.3)';
-        ctx.lineWidth = dpr;
-        ctx.arc(nd.x, nd.y, nd.r * 5, 0, Math.PI * 2);
-        ctx.stroke();
+      btnMode3D.addEventListener("click", function () { setAvatarMode("3d"); });
+      btnModePhoto.addEventListener("click", function () { setAvatarMode("photo"); });
+
+      btnOpenPromptModal.addEventListener("click", function () {
+        promptModal.classList.add("open");
+      });
+      btnClosePromptModal.addEventListener("click", function () {
+        promptModal.classList.remove("open");
+      });
+      promptModal.addEventListener("click", function (e) {
+        if (e.target === promptModal) promptModal.classList.remove("open");
+      });
+
+      btnCopyPrompt.addEventListener("click", function () {
+        const text = document.getElementById("chatgptPromptText").innerText;
+        const temp = document.createElement("textarea");
+        temp.value = text;
+        document.body.appendChild(temp);
+        temp.select();
+        document.execCommand("copy");
+        document.body.removeChild(temp);
+        btnCopyPrompt.textContent = "Copied! ✓";
+        setTimeout(function () { btnCopyPrompt.textContent = "Copy Prompt"; }, 2000);
+      });
+
+      avatarFileInput.addEventListener("change", function (e) {
+        const file = e.target.files && e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function (ev) {
+          customAvatarImg.src = ev.target.result;
+          setAvatarMode("photo");
+          promptModal.classList.remove("open");
+        };
+        reader.readAsDataURL(file);
+      });
+
+      /* ---------------------------------------------------------
+         5. SCROLLSPY FOR FLOATING PILL NAVBAR
+         --------------------------------------------------------- */
+      const navItems = document.querySelectorAll(".pill-nav .nav-item");
+      const sections = document.querySelectorAll("section[id]");
+
+      if ("IntersectionObserver" in window) {
+        const spy = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              const id = entry.target.getAttribute("id");
+              navItems.forEach(function (link) {
+                link.classList.toggle("active", link.getAttribute("href") === "#" + id);
+              });
+            }
+          });
+        }, { rootMargin: "-40% 0px -50% 0px" });
+
+        sections.forEach(function (sec) { spy.observe(sec); });
       }
+    })();
+
+    /* ---------------------------------------------------------
+       6. SYSTEM ARCHITECTURE & SECURITY AUDIT MODAL DATA
+       --------------------------------------------------------- */
+    const ARCH_DATA = {
+      upi: {
+        eyebrow: "Graph ML · Cost-Sensitive Thresholding · 26-Finding Audit",
+        title: "UPI Mule-Ring Sentinel — Architecture & Audit",
+        html: `
+          <div class="p-4 rounded-xl bg-black/50 border border-rose-300/20 font-mono text-xs overflow-x-auto">
+            <div class="text-rose-300 mb-2 font-semibold">DATAFLOW PIPELINE:</div>
+            <div class="flex flex-wrap items-center gap-2 text-rose-100">
+              <span class="px-2.5 py-1.5 rounded bg-rose-950/90 border border-rose-500/40">3,000-Account UPI Graph</span>
+              <span>→</span>
+              <span class="px-2.5 py-1.5 rounded bg-rose-950/90 border border-rose-500/40">18 Graph Features (Cycles, PageRank, Louvain)</span>
+              <span>→</span>
+              <span class="px-2.5 py-1.5 rounded bg-rose-950/90 border border-rose-500/40">Ring-Disjoint Split</span>
+              <span>→</span>
+              <span class="px-2.5 py-1.5 rounded bg-rose-950/90 border border-rose-500/40">XGBoost + Rupee Cost Matrix</span>
+              <span>→</span>
+              <span class="px-2.5 py-1.5 rounded bg-emerald-950/90 border border-emerald-500/40 text-emerald-200">Defense-Only FastAPI Service</span>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="p-4 rounded-xl bg-white/5 border border-rose-200/15">
+              <h4 class="font-bold text-white mb-1">Rupee Cost Matrix Optimization</h4>
+              <p class="text-xs text-rose-100/75 leading-relaxed">
+                Instead of defaulting to a 0.50 probability threshold or maximizing F1, the alert threshold was tuned against real asymmetric financial loss: <strong>₹2,00,000 per missed mule account</strong> vs. <strong>₹15,000 analyst investigation cost per false positive</strong>, reducing modeled loss from ₹12.8M to ₹4.72M.
+              </p>
+            </div>
+            <div class="p-4 rounded-xl bg-white/5 border border-rose-200/15">
+              <h4 class="font-bold text-white mb-1">26-Finding Codebase Audit &amp; 375 Tests</h4>
+              <p class="text-xs text-rose-100/75 leading-relaxed">
+                Enforced a strict read/flag-only action ceiling through 3 independent validation rails and an import-time enum sweep so the service can never autonomously freeze funds without human-in-the-loop signoff.
+              </p>
+            </div>
+          </div>
+        `
+      },
+      omni: {
+        eyebrow: "LangGraph Parallel Swarm · Resilient LLM Orchestration",
+        title: "Omni-Agent Trading Nexus — System Architecture",
+        html: `
+          <div class="p-4 rounded-xl bg-black/50 border border-rose-300/20 font-mono text-xs overflow-x-auto">
+            <div class="text-rose-300 mb-2 font-semibold">PARALLEL DAG TOPOLOGY:</div>
+            <div class="flex flex-wrap items-center gap-2 text-rose-100">
+              <span class="px-2.5 py-1.5 rounded bg-rose-950/90 border border-rose-500/40">Market Event Stream</span>
+              <span>⇉</span>
+              <span class="px-2.5 py-1.5 rounded bg-rose-950/90 border border-rose-500/40">[Sentiment Agent || Technical Agent || Macro Agent]</span>
+              <span>→</span>
+              <span class="px-2.5 py-1.5 rounded bg-rose-950/90 border border-rose-500/40">Risk Aggregator Node</span>
+              <span>→</span>
+              <span class="px-2.5 py-1.5 rounded bg-emerald-950/90 border border-emerald-500/40 text-emerald-200">WebSocket React Stream</span>
+            </div>
+          </div>
+          <p class="text-xs sm:text-sm text-rose-100/80 leading-relaxed">
+            <strong>Benchmark Context:</strong> By executing sentiment and technical indicator agents concurrently inside LangGraph rather than in a sequential chain, end-to-end signal latency dropped by 40%. Under simulated HTTP 429 rate-limit bursts (1,200+ requests), automatic cascading from Gemini Pro to Gemini Flash with jittered exponential backoff achieved 99.8% completion.
+          </p>
+        `
+      },
+      aegis: {
+        eyebrow: "Industrial Edge Telemetry · Native C++ ONNX Inference",
+        title: "Aegis-Edge — Sub-5ms Edge Pipeline",
+        html: `
+          <div class="p-4 rounded-xl bg-black/50 border border-rose-300/20 font-mono text-xs overflow-x-auto">
+            <div class="flex flex-wrap items-center gap-2 text-rose-100">
+              <span class="px-2.5 py-1.5 rounded bg-rose-950/90 border border-rose-500/40">50Hz CNC Sensor Stream</span>
+              <span>→</span>
+              <span class="px-2.5 py-1.5 rounded bg-rose-950/90 border border-rose-500/40">Kafka (KRaft) Broker</span>
+              <span>→</span>
+              <span class="px-2.5 py-1.5 rounded bg-rose-950/90 border border-rose-500/40">PySpark Micro-Batches</span>
+              <span>→</span>
+              <span class="px-2.5 py-1.5 rounded bg-emerald-950/90 border border-emerald-500/40 text-emerald-200">C++ ONNX Runtime (INT8 + Arena Pool)</span>
+            </div>
+          </div>
+          <p class="text-xs sm:text-sm text-rose-100/80 leading-relaxed">
+            Exported PyTorch 1D-CNN models to ONNX with INT8 quantization and executed inference inside a custom C++ runtime with pre-allocated memory arenas — bypassing Python GIL and JSON serialization overhead to sustain 45+ FPS at under 5ms per frame.
+          </p>
+        `
+      },
+      vigil: {
+        eyebrow: "Automated SIEM Triage · Multi-Agent SecOps",
+        title: "VIGIL-SOAR — Event-Driven Triage Pipeline",
+        html: `
+          <div class="p-4 rounded-xl bg-black/50 border border-rose-300/20 font-mono text-xs overflow-x-auto">
+            <div class="flex flex-wrap items-center gap-2 text-rose-100">
+              <span class="px-2.5 py-1.5 rounded bg-rose-950/90 border border-rose-500/40">SIEM Log Ingestion</span>
+              <span>→</span>
+              <span class="px-2.5 py-1.5 rounded bg-rose-950/90 border border-rose-500/40">LangGraph Triage Router</span>
+              <span>→</span>
+              <span class="px-2.5 py-1.5 rounded bg-rose-950/90 border border-rose-500/40">3 Groq (Llama 3.1) Forensics Agents</span>
+              <span>→</span>
+              <span class="px-2.5 py-1.5 rounded bg-emerald-950/90 border border-emerald-500/40 text-emerald-200">Pydantic Validated Playbook</span>
+            </div>
+          </div>
+          <p class="text-xs sm:text-sm text-rose-100/80 leading-relaxed">
+            <strong>Benchmark Context:</strong> Evaluated against a sequential single-agent baseline across replayed Active Directory &amp; SIEM alert batches, splitting log correlation, MITRE ATT&amp;CK mapping, and remediation drafting across 3 specialized Llama 3.1 agents reduced total triage time by 65%.
+          </p>
+        `
+      },
+      rag: {
+        eyebrow: "Multi-Tenant Vector Isolation · Deterministic Gatekeeper",
+        title: "Zero-Trust RAG Engine — Security Flow",
+        html: `
+          <div class="p-4 rounded-xl bg-black/50 border border-rose-300/20 font-mono text-xs overflow-x-auto">
+            <div class="flex flex-wrap items-center gap-2 text-rose-100">
+              <span class="px-2.5 py-1.5 rounded bg-rose-950/90 border border-rose-500/40">JWT + Role Claims</span>
+              <span>→</span>
+              <span class="px-2.5 py-1.5 rounded bg-rose-950/90 border border-rose-500/40">LangGraph Policy Gatekeeper</span>
+              <span>→</span>
+              <span class="px-2.5 py-1.5 rounded bg-rose-950/90 border border-rose-500/40">Qdrant Mandatory Metadata Pre-Filter</span>
+              <span>→</span>
+              <span class="px-2.5 py-1.5 rounded bg-emerald-950/90 border border-emerald-500/40 text-emerald-200">Zero-Leakage Gemini Synthesis</span>
+            </div>
+          </div>
+          <p class="text-xs sm:text-sm text-rose-100/80 leading-relaxed">
+            Prevents cross-tenant data leakage by binding user RBAC clearance tokens directly to Qdrant payload filters <em>before</em> HNSW similarity search runs, and short-circuiting unauthorized prompts inside a deterministic LangGraph node before any LLM tokens are consumed.
+          </p>
+        `
+      }
+    };
+
+    function openArchModal(key) {
+      const item = ARCH_DATA[key];
+      if (!item) return;
+      document.getElementById("modalEyebrow").textContent = item.eyebrow;
+      document.getElementById("modalTitle").textContent = item.title;
+      document.getElementById("modalBody").innerHTML = item.html;
+      document.getElementById("archModal").classList.add("open");
     }
 
-    if(!reduceMotion) requestAnimationFrame(frame);
-  }
+    function closeArchModal() {
+      document.getElementById("archModal").classList.remove("open");
+    }
 
-  function start(){
-    resize();
-    initNodes();
-    frame();
-  }
-
-  var resizeTimer;
-  window.addEventListener('resize', function(){
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(function(){
-      resize(); initNodes();
-      if(reduceMotion) frame();
-    }, 150);
-  });
-
-  start();
-})();
-</script>
+    document.getElementById("archModal").addEventListener("click", function (e) {
+      if (e.target.id === "archModal") closeArchModal();
+    });
+  </script>
 </body>
+
 </html>
